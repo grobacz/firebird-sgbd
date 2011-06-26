@@ -38,7 +38,15 @@ namespace TEST
                 //insertCommand.ExecuteNonQuery();
 
                 // select
-                FbCommand selectCommand = new FbCommand("SELECT * FROM test;", con);
+
+                FbTransactionOptions op = new FbTransactionOptions();
+                op.TransactionBehavior = FbTransactionBehavior.ReadCommitted;
+
+                FbTransaction transaction; 
+                //transaction = con.BeginTransaction(op);
+                transaction = con.BeginTransaction(System.Data.IsolationLevel.ReadCommitted);
+
+                FbCommand selectCommand = new FbCommand("SELECT * FROM test;", con, transaction);
                 FbDataReader reader = selectCommand.ExecuteReader();
 
                 while (reader.Read())
