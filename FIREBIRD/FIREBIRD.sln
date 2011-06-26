@@ -5,6 +5,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FIREBIRD", "FIREBIRD\FIREBI
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TEST", "ConsoleApplication1\TEST.csproj", "{CDB3E9AD-0E7E-4BC2-B903-F9529E494B82}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{49DEC70A-8B9F-499B-A637-C3A60ABEB845}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Control", "Control\Control.csproj", "{45FD3246-0D9E-465B-8AC2-40FFA4CF7505}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -19,6 +23,14 @@ Global
 		{CDB3E9AD-0E7E-4BC2-B903-F9529E494B82}.Debug|x86.Build.0 = Debug|x86
 		{CDB3E9AD-0E7E-4BC2-B903-F9529E494B82}.Release|x86.ActiveCfg = Release|x86
 		{CDB3E9AD-0E7E-4BC2-B903-F9529E494B82}.Release|x86.Build.0 = Release|x86
+		{49DEC70A-8B9F-499B-A637-C3A60ABEB845}.Debug|x86.ActiveCfg = Debug|x86
+		{49DEC70A-8B9F-499B-A637-C3A60ABEB845}.Debug|x86.Build.0 = Debug|x86
+		{49DEC70A-8B9F-499B-A637-C3A60ABEB845}.Release|x86.ActiveCfg = Release|x86
+		{49DEC70A-8B9F-499B-A637-C3A60ABEB845}.Release|x86.Build.0 = Release|x86
+		{45FD3246-0D9E-465B-8AC2-40FFA4CF7505}.Debug|x86.ActiveCfg = Debug|x86
+		{45FD3246-0D9E-465B-8AC2-40FFA4CF7505}.Debug|x86.Build.0 = Debug|x86
+		{45FD3246-0D9E-465B-8AC2-40FFA4CF7505}.Release|x86.ActiveCfg = Release|x86
+		{45FD3246-0D9E-465B-8AC2-40FFA4CF7505}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

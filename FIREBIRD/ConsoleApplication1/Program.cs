@@ -19,7 +19,7 @@ namespace TEST
                 Console.WriteLine(path);
                 Console.WriteLine(File.Exists(Path.Combine(Environment.CurrentDirectory, @"..\..\data\SGBD.FDB")));
 
-                FbConnection con = new FbConnection("User ID=sysdba;Password=290389;" +
+                FbConnection con = new FbConnection("User ID=sysdba;Password=masterkey;" +
                    "Database=" + path + "; " +
                    "DataSource=localhost;Charset=NONE;");
                 con.Open();
@@ -39,28 +39,28 @@ namespace TEST
 
                 // select
 
-                FbTransactionOptions op = new FbTransactionOptions();
-                op.TransactionBehavior = FbTransactionBehavior.ReadCommitted;
+                //FbTransactionOptions op = new FbTransactionOptions();
+                //op.TransactionBehavior = FbTransactionBehavior.ReadCommitted;
 
-                FbTransaction transaction; 
-                //transaction = con.BeginTransaction(op);
-                transaction = con.BeginTransaction(System.Data.IsolationLevel.ReadCommitted);
+                //FbTransaction transaction; 
+                ////transaction = con.BeginTransaction(op);
+                //transaction = con.BeginTransaction(System.Data.IsolationLevel.ReadCommitted);
 
-                FbCommand selectCommand = new FbCommand("SELECT * FROM test;", con, transaction);
-                FbDataReader reader = selectCommand.ExecuteReader();
+                //FbCommand selectCommand = new FbCommand("SELECT * FROM test;", con, transaction);
+                //FbDataReader reader = selectCommand.ExecuteReader();
 
-                while (reader.Read())
-                {
-                    // acessando via nome da coluna
-                    Console.WriteLine(reader["id"]);
-                    Console.WriteLine(reader["nome"]);
-                    Console.WriteLine(reader["salario"]);
+                //while (reader.Read())
+                //{
+                //    // acessando via nome da coluna
+                //    Console.WriteLine(reader["id"]);
+                //    Console.WriteLine(reader["nome"]);
+                //    Console.WriteLine(reader["salario"]);
 
-                    // acessando via índice de coluna com método "GetType"
-                    Console.WriteLine(reader.GetInt32(0));
-                    Console.WriteLine(reader.GetString(1));
-                    Console.WriteLine(reader.GetDecimal(2));
-                }
+                //    // acessando via índice de coluna com método "GetType"
+                //    Console.WriteLine(reader.GetInt32(0));
+                //    Console.WriteLine(reader.GetString(1));
+                //    Console.WriteLine(reader.GetDecimal(2));
+                //}
 
             }
             catch(Exception ex)
