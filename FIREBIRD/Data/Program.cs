@@ -16,7 +16,7 @@ namespace Data
             //filmeDao.Atualizar(1, "A bela caída", 12.87m, Genero.DOCUMENTARIO, 2010, null);
             
             filmeDao.Listar();
-            Console.Write("");
+            filmeDao.Remover(1);
         }
     }
 }
