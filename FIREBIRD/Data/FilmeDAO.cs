@@ -7,7 +7,7 @@ using Data.Classes;
 
 namespace Data
 {
-    public class FilmeDAO
+    public class FilmeDAO : IFilmeDAO
     {
         public void Inserir(string nome, decimal preco, string genero, int ano, byte[] imagem)
         {
