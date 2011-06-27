@@ -16,8 +16,14 @@ namespace Data
             //filmeDao.Inserir("Tempos complicados", 1.23m, Genero.COMEDIA, 2009, null);
             //filmeDao.Atualizar(1, "A bela caída", 12.87m, Genero.DOCUMENTARIO, 2010, null);
 
-            //locacaoDao.Inserir("08299704448", new List<int> { 4 });
-            Locacao l = locacaoDao.Recuperar(1);
+            //locacaoDao.Inserir("08299704448", new List<int> { 2, 3 });
+            //locacaoDao.Atualizar(1, (int)Status.Disponivel);
+            IList<Locacao> locacoes = locacaoDao.Listar();
+
+            foreach (var item in locacoes)
+            {
+                Console.WriteLine(item);
+            }
 
         }
     }
