@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Data.Classes;
 using FirebirdSql.Data.FirebirdClient;
+using System.Data;
 
 namespace Data
 {
@@ -95,7 +96,9 @@ namespace Data
             Cliente cliente = null;
 
             FbConnection conexao = Connection.Instance.GetConnection();
-            conexao.Open();
+            
+            if (conexao.State != ConnectionState.Open)
+                conexao.Open();
 
             FbTransaction transacao = conexao.BeginTransaction();
 
@@ -143,5 +146,32 @@ namespace Data
         }
 
         #endregion
+
+        public Cliente Recuperar(string cpf, FbConnection conexao, FbTransaction transacao)
+        {
+            Cliente cliente = null;
+
+            string sql = "SELECT cpf, nome, endereco, telefone, data_nascimento FROM cliente WHERE cpf = @cpf;";
+
+            FbCommand comando = new FbCommand(sql, conexao, transacao);
+            comando.Parameters.AddWithValue("@cpf", cpf);
+
+            FbDataReader reader = comando.ExecuteReader();
+
+            while (reader.Read())
+            {
+                cliente = new Cliente()
+                {
+                    Cpf = reader.GetString(0),
+                    Nome = reader.GetString(1),
+                    Endereco = reader.GetString(2),
+                    Telefone = reader.GetString(3),
+                    DataNascimento = reader.GetDateTime(4)
+                };
+
+            }
+
+            return cliente;
+        }
     }
 }
