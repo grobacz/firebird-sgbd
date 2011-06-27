@@ -9,6 +9,15 @@ namespace Data
 {
     public class LocacaoDAO : ILocacaoDAO
     {
+        private FilmeDAO _filmeDao;
+        private ClienteDAO _clienteDao;
+
+        public LocacaoDAO()
+        {
+            _filmeDao = new FilmeDAO();
+            _clienteDao = new ClienteDAO();
+        }
+
         #region ILocacaoDAO Members
 
         public void Atualizar(int codigo, int status)
@@ -32,6 +41,8 @@ namespace Data
 
         public void Inserir(string cpfCliente, IList<int> codigoFilmes)
         {
+            // TODO: Verificar se o filme está disponível (se for necessário realmente)
+
             FbConnection conexao = Connection.Instance.GetConnection();
             conexao.Open();
 
@@ -39,7 +50,7 @@ namespace Data
 
             string insertSql = "INSERT INTO locacao (codigo, cpf_cliente, codigo_filme, status) VALUES (@codigo, @cpf, @codigoFilme, @status);";
 
-            int codigoLocacao = ProximoCodigo(conexao);
+            int codigoLocacao = ProximoCodigo(conexao, transacao);
 
             foreach (int codigo in codigoFilmes)
             {
@@ -59,60 +70,148 @@ namespace Data
 
         public IList<Locacao> Listar()
         {
-            //IList<Locacao> filmes = new List<Locacao>();
+            IList<Locacao> locacoes = new List<Locacao>();
 
-            //FbConnection conexao = Connection.Instance.GetConnection();
-            //conexao.Open();
+            FbConnection conexao = Connection.Instance.GetConnection();
+            conexao.Open();
 
-            //FbTransaction transacao = conexao.BeginTransaction();
+            FbTransaction transacao = conexao.BeginTransaction();
 
-            //string sql = "SELECT codigo, cpf_cliente, codigo_filme, genero, ano_lancamento, imagem FROM filme;";
+            string sql = "SELECT DISTINCT codigo FROM locacao;";
 
-            //FbCommand comando = new FbCommand(sql, conexao, transacao);
-            //FbDataReader reader = comando.ExecuteReader();
+            FbCommand comando = new FbCommand(sql, conexao, transacao);
+            FbDataReader reader = comando.ExecuteReader();
 
-            //while (reader.Read())
-            //{
-            //    Filme filme = new Filme()
-            //    {
-            //        Codigo = reader.GetInt32(0),
-            //        Nome = reader.GetString(1),
-            //        Preco = reader.GetDecimal(2),
-            //        Genero = reader.GetString(3),
-            //        Ano = reader.GetInt32(4),
-            //    };
+            while (reader.Read())
+            {
+                int codigo = reader.GetInt32(0);
+                locacoes.Add(Recuperar(codigo, conexao, transacao));
+            }
 
-            //    if (!reader.IsDBNull(5))
-            //    {
-            //        filme.Imagem = (byte[])reader["imagem"];
-            //    }
+            conexao.Close();
 
-            //    filmes.Add(filme);
-
-            //}
-
-            //conexao.Close();
-
-            return null;
+            return locacoes;
         }
 
-        public Locacao Recuperar(string codigo)
+        private Locacao Recuperar(int codigo, FbConnection conexao, FbTransaction transacao)
         {
-            throw new NotImplementedException();
+            Locacao locacao = null;
+
+            Cliente cliente;
+            IList<Filme> filmes = new List<Filme>();
+            string cpfCliente = "";
+            int status = 0;
+            IList<int> codigoFilmes = new List<int>();
+
+            string sql = "SELECT DISTINCT cpf_cliente, status FROM locacao WHERE codigo = @codigo;";
+
+            FbCommand comando = new FbCommand(sql, conexao, transacao);
+            comando.Parameters.AddWithValue("@codigo", codigo);
+
+            FbDataReader reader = comando.ExecuteReader();
+
+            if (reader.Read())
+            {
+                cpfCliente = reader.GetString(0);
+                status = reader.GetInt32(1);
+            }
+
+            codigoFilmes = CodigoFilmes(codigo, conexao, transacao);
+
+            foreach (int codigoFilme in codigoFilmes)
+            {
+                filmes.Add(_filmeDao.Recuperar(codigoFilme));
+            }
+
+            cliente = _clienteDao.Recuperar(cpfCliente);
+
+            conexao.Close();
+
+            locacao = new Locacao()
+            {
+                Cliente = cliente,
+                Codigo = codigo,
+                Filmes = filmes,
+                Status = StatusUtil.ToStatus(status)
+            };
+
+            return locacao;
         }
 
-        public void Remover(string codigo)
+        public Locacao Recuperar(int codigo)
         {
-            throw new NotImplementedException();
+            Locacao locacao = null;
+
+            Cliente cliente;
+            IList<Filme> filmes = new List<Filme>();
+            string cpfCliente = "";
+            int status = 0;
+            IList<int> codigoFilmes = new List<int>();
+
+            FbConnection conexao = Connection.Instance.GetConnection();
+            conexao.Open();
+
+            FbTransaction transacao = conexao.BeginTransaction();
+
+            string sql = "SELECT DISTINCT cpf_cliente, status FROM locacao WHERE codigo = @codigo;";
+
+            FbCommand comando = new FbCommand(sql, conexao, transacao);
+            comando.Parameters.AddWithValue("@codigo", codigo);
+
+            FbDataReader reader = comando.ExecuteReader();
+
+            if (reader.Read())
+            {
+                cpfCliente = reader.GetString(0);
+                status = reader.GetInt32(1);
+            }
+
+            codigoFilmes = CodigoFilmes(codigo, conexao, transacao);
+
+            foreach (int codigoFilme in codigoFilmes)
+            {
+                filmes.Add(_filmeDao.Recuperar(codigoFilme));
+            }
+
+            cliente = _clienteDao.Recuperar(cpfCliente);
+
+            conexao.Close();
+
+            locacao = new Locacao()
+            {
+                Cliente = cliente,
+                Codigo = codigo,
+                Filmes = filmes,
+                Status = StatusUtil.ToStatus(status)
+            };
+
+            return locacao;
+        }
+
+        public void Remover(int codigo)
+        {
+            FbConnection conexao = Connection.Instance.GetConnection();
+            conexao.Open();
+
+            FbTransaction transacao = conexao.BeginTransaction();
+
+            string sql = "DELETE FROM locacao WHERE codigo = @codigo;";
+
+            FbCommand comando = new FbCommand(sql, conexao, transacao);
+            comando.Parameters.AddWithValue("@codigo", codigo);
+
+            comando.ExecuteNonQuery();
+
+            transacao.Commit();
+
+            conexao.Close();
         }
 
         #endregion
 
-        private int ProximoCodigo(FbConnection conexao)
+        private int ProximoCodigo(FbConnection conexao, FbTransaction transacao)
         {
             int retorno = 1;
-
-            FbTransaction transacao = conexao.BeginTransaction();
 
             string sql = "SELECT MAX(codigo) as codigo from LOCACAO;";
 
@@ -131,9 +230,26 @@ namespace Data
             return retorno;
         }
 
-        //private Cliente Cliente(int codigo, FbConnection conexao)
-        //{
+        private IList<int> CodigoFilmes(int codigo, FbConnection conexao, FbTransaction transacao)
+        {
+            IList<int> retorno = new List<int>();
 
-        //}
+            string sql = "SELECT codigo_filme FROM locacao WHERE codigo = @codigo;";
+
+            FbCommand comando = new FbCommand(sql, conexao, transacao);
+            comando.Parameters.AddWithValue("@codigo", codigo);
+
+            FbDataReader reader = comando.ExecuteReader();
+
+
+            while (reader.Read())
+            {
+                retorno.Add(reader.GetInt32(0));
+            }
+
+            return retorno;
+
+        }
+
     }
 }
