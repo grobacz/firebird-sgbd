@@ -47,6 +47,57 @@ namespace Data
             return connection;
         }
 
+        
 
+        public void TransactionParameter(configTransacao index)
+        {
+            FbTransactionOptions configTran = new FbTransactionOptions();
+
+            switch(index)
+            {
+                case configTransacao.Consistency:
+                    configTran.TransactionBehavior = FbTransactionBehavior.Consistency;
+                    break;
+                case configTransacao.Concurrency_NOWAIT:
+                    configTran.TransactionBehavior = FbTransactionBehavior.Concurrency | FbTransactionBehavior.NoWait;
+                    break;
+                case configTransacao.Concurrency_WAIT:
+                    configTran.TransactionBehavior = FbTransactionBehavior.Concurrency | FbTransactionBehavior.Wait;
+                    break;
+                case configTransacao.ReadCommitted_NOWAIT:
+                    configTran.TransactionBehavior = FbTransactionBehavior.ReadCommitted | FbTransactionBehavior.NoWait;
+                    break;
+                case configTransacao.ReadCommitted_WAIT:
+                    configTran.TransactionBehavior = FbTransactionBehavior.ReadCommitted | FbTransactionBehavior.Wait;
+                    break;
+                default:
+                    Console.WriteLine("Default case");
+                    break;
+            }
+            connection.BeginTransaction(configTran);
+
+          /*  connection.BeginTransaction(new FbTransactionOptions()
+            {
+                TransactionBehavior = FbTransactionBehavior.ReadCommitted,  // etc.
+                LockTables = new Dictionary<string, FbTransactionBehavior>
+                {
+                    { "TABLE_1", FbTransactionBehavior.LockWrite | FbTransactionBehavior.Shared },
+                    { "TABLE_2", FbTransactionBehavior.LockWrite | FbTransactionBehavior.Exclusive }
+                }
+            });
+            */
+
+        }
+
+        public enum configTransacao
+        {
+            Consistency = 1,
+            Concurrency_WAIT = 2,
+            Concurrency_NOWAIT = 3,
+            ReadCommitted_WAIT = 4,
+            ReadCommitted_NOWAIT = 5
+
+
+        };
     }
 }
