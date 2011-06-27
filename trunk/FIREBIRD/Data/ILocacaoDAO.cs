@@ -11,7 +11,7 @@ namespace Data
         void Atualizar(int codigo, int status);
         void Inserir(string cpfCliente, IList<int> codigoFilmes);
         IList<Locacao> Listar();
-        Locacao Recuperar(string codigo);
-        void Remover(string codigo);
+        Locacao Recuperar(int codigo);
+        void Remover(int codigo);
     }
 }

@@ -8,8 +8,9 @@ namespace Data.Classes
     public class Locacao
     {
         public int Codigo { get; set; }
-        public DateTime Data { get; set; }
+        //public DateTime Data { get; set; }
         public IList<Filme> Filmes { get; set; }
         public Cliente Cliente { get; set; }
+        public Status Status { get; set; }
     }
 }
