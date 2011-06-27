@@ -52,8 +52,47 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Principal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Principal.Designer.cs">
+      <DependentUpon>Principal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TelaAtualizarCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TelaAtualizarCliente.Designer.cs">
+      <DependentUpon>TelaAtualizarCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TelaAtualizarFilme.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TelaAtualizarFilme.Designer.cs">
+      <DependentUpon>TelaAtualizarFilme.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TelaInserirCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TelaInserirCliente.Designer.cs">
+      <DependentUpon>TelaInserirCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TelaInserirFilme.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TelaInserirFilme.Designer.cs">
+      <DependentUpon>TelaInserirFilme.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TelaInserirLocacao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TelaInserirLocacao.Designer.cs">
+      <DependentUpon>TelaInserirLocacao.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Principal.resx">
+      <DependentUpon>Principal.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -62,7 +101,23 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="TelaAtualizarCliente.resx">
+      <DependentUpon>TelaAtualizarCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TelaAtualizarFilme.resx">
+      <DependentUpon>TelaAtualizarFilme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TelaInserirCliente.resx">
+      <DependentUpon>TelaInserirCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TelaInserirFilme.resx">
+      <DependentUpon>TelaInserirFilme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TelaInserirLocacao.resx">
+      <DependentUpon>TelaInserirLocacao.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -72,6 +127,19 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CapaImagem.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Control\Control.csproj">
+      <Project>{45FD3246-0D9E-465B-8AC2-40FFA4CF7505}</Project>
+      <Name>Control</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{49DEC70A-8B9F-499B-A637-C3A60ABEB845}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
