@@ -12,5 +12,17 @@ namespace Data.Classes
         public IList<Filme> Filmes { get; set; }
         public Cliente Cliente { get; set; }
         public Status Status { get; set; }
+
+        public override string ToString()
+        {
+            string filmes = "";
+
+            foreach (var item in Filmes)
+            {
+                filmes += item.Codigo + " - " + item.Nome + " | ";
+            }
+
+            return string.Format("Código: {0}, Cliente: {1}, Status: {2}, Filmes: {3}", Codigo, Cliente.Cpf, Status, filmes);
+        }
     }
 }
