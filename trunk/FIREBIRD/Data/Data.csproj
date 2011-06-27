@@ -46,11 +46,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cliente.cs" />
+    <Compile Include="ClienteDAO.cs" />
     <Compile Include="Connection.cs" />
     <Compile Include="Filme.cs" />
     <Compile Include="FilmeDAO.cs" />
     <Compile Include="Genero.cs" />
+    <Compile Include="IClienteDao.cs" />
+    <Compile Include="IFilmeDAO.cs" />
+    <Compile Include="ILocacaoDAO.cs" />
     <Compile Include="Locacao.cs" />
+    <Compile Include="LocacaoDAO.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Status.cs" />
