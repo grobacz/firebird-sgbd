@@ -12,7 +12,14 @@ namespace Data
         private static Connection instance;
         private FbConnection connection;
 
-        private Connection() { }
+        private Connection()
+        {
+            string path = Path.Combine(Environment.CurrentDirectory, @"..\..\data\LOCADORA.FDB");
+
+            connection = new FbConnection("User ID=sysdba;Password=masterkey;" +
+                   "Database=" + path + "; " +
+                   "DataSource=localhost;Charset=NONE;");
+        }
 
         public static Connection Instance
         {
