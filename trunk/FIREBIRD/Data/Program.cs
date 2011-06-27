@@ -18,12 +18,7 @@ namespace Data
 
             //locacaoDao.Inserir("08299704448", new List<int> { 2, 3 });
             //locacaoDao.Atualizar(1, (int)Status.Disponivel);
-            IList<Locacao> locacoes = locacaoDao.Listar();
-
-            foreach (var item in locacoes)
-            {
-                Console.WriteLine(item);
-            }
+            Console.WriteLine(locacaoDao.Recuperar(2));
 
         }
     }
