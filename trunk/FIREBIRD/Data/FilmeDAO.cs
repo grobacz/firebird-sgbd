@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using FirebirdSql.Data.FirebirdClient;
 using Data.Classes;
+using System.Windows.Forms;
 using System.Data;
 
 namespace Data
@@ -52,6 +53,57 @@ namespace Data
 
             comando.ExecuteNonQuery();
             transacao.Commit();
+
+            conexao.Close();
+        }
+
+        public void preencherDataGridView(DataGridView dgvFilmes)
+        {
+            FbConnection conexao = Connection.Instance.GetConnection();
+            conexao.Open();
+
+            FbTransaction transacao = conexao.BeginTransaction();
+
+            string sql = "SELECT codigo, nome, preco, genero, ano_lancamento, imagem FROM filme;";
+
+            FbCommand comando = new FbCommand(sql, conexao, transacao);
+            FbDataReader dr = comando.ExecuteReader();
+
+            int nColunas = dr.FieldCount;
+
+            for (int i = 0; i < nColunas; i++)
+            {
+                if (!dr.GetName(i).ToString().Equals("IMAGEM"))
+                {
+                    dgvFilmes.Columns.Add(dr.GetName(i).ToString(), dr.GetName(i).ToString());
+                    dgvFilmes.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+                }
+            }
+
+            string[] linhaDados = new string[nColunas];
+
+            while (dr.Read())
+            {
+                //percorre cada uma das colunas
+                for (int a = 0; a < nColunas; a++)
+                {
+                    if (dr.GetFieldType(a).ToString() == "System.Int32")
+                    {
+                        linhaDados[a] = dr.GetInt32(a).ToString();
+                    }
+                    if (dr.GetFieldType(a).ToString() == "System.String")
+                    {
+                        linhaDados[a] = dr.GetString(a).ToString();
+                    }
+                    if (dr.GetFieldType(a).ToString() == "System.Decimal")
+                    {
+                        linhaDados[a] = dr.GetString(a).ToString();
+                    }
+                }
+
+                //atribui a linha ao datagridview
+                dgvFilmes.Rows.Add(linhaDados);
+            }
 
             conexao.Close();
         }
