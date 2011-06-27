@@ -170,10 +170,10 @@ namespace Data
 
             foreach (int codigoFilme in codigoFilmes)
             {
-                filmes.Add(_filmeDao.Recuperar(codigoFilme));
+                filmes.Add(_filmeDao.Recuperar(codigoFilme, conexao, transacao));
             }
 
-            cliente = _clienteDao.Recuperar(cpfCliente);
+            cliente = _clienteDao.Recuperar(cpfCliente, conexao, transacao);
 
             conexao.Close();
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using FirebirdSql.Data.FirebirdClient;
 using Data.Classes;
+using System.Data;
 
 namespace Data
 {
@@ -99,6 +100,7 @@ namespace Data
             Filme filme = null;
 
             FbConnection conexao = Connection.Instance.GetConnection();
+
             conexao.Open();
 
             FbTransaction transacao = conexao.BeginTransaction();
@@ -151,5 +153,37 @@ namespace Data
             conexao.Close();
         }
 
+
+        public Filme Recuperar(int codigo, FbConnection conexao, FbTransaction transacao)
+        {
+            Filme filme = null;
+
+            string sql = "SELECT codigo, nome, preco, genero, ano_lancamento, imagem FROM filme WHERE codigo = @codigo;";
+
+            FbCommand comando = new FbCommand(sql, conexao, transacao);
+            comando.Parameters.AddWithValue("@codigo", codigo);
+
+            FbDataReader reader = comando.ExecuteReader();
+
+            while (reader.Read())
+            {
+                filme = new Filme()
+                {
+                    Codigo = reader.GetInt32(0),
+                    Nome = reader.GetString(1),
+                    Preco = reader.GetDecimal(2),
+                    Genero = reader.GetString(3),
+                    Ano = reader.GetInt32(4),
+                };
+
+                if (!reader.IsDBNull(5))
+                {
+                    filme.Imagem = (byte[])reader["imagem"];
+                }
+
+            }
+
+            return filme;
+        }
     }
 }
