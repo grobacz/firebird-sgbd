@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using FirebirdSql.Data.FirebirdClient;
 using Data.Classes;
+using System.Windows.Forms;
 
 namespace Data
 {
@@ -91,6 +92,74 @@ namespace Data
             conexao.Close();
 
             return locacoes;
+        }
+
+        public void preencherDataGridView(DataGridView dgvLocacao)
+        {
+            FbConnection conexao = Connection.Instance.GetConnection();
+            conexao.Open();
+
+            FbTransaction transacao = conexao.BeginTransaction();
+
+            string sql = "SELECT * FROM locacao;";
+
+            FbCommand comando = new FbCommand(sql, conexao, transacao);
+            FbDataReader dr = comando.ExecuteReader();
+
+            int nColunas = dr.FieldCount;
+
+            for (int i = 0; i < nColunas; i++)
+            {
+                dgvLocacao.Columns.Add(dr.GetName(i).ToString(), dr.GetName(i).ToString());
+                dgvLocacao.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;   
+            }
+
+            string[] linhaDados = new string[nColunas];
+
+            while (dr.Read())
+            {
+                //percorre cada uma das colunas
+                for (int a = 0; a < nColunas; a++)
+                {
+                    if (dr.GetFieldType(a).ToString() == "System.Int32")
+                    {
+                        if (dr.GetName(a).ToString().Equals("CODIGO"))
+                        {
+                            DataGridViewCell cell = new DataGridViewLinkCell();
+                            cell.Value = dr.GetInt32(a).ToString();
+                            linhaDados[a] = cell.Value.ToString();
+                        }
+                        else
+                        {
+                            linhaDados[a] = dr.GetInt32(a).ToString();
+                        }
+                    }
+                    if (dr.GetFieldType(a).ToString() == "System.String")
+                    {
+                        if (dr.GetName(a).ToString().Equals("STATUS"))
+                        {
+                            DataGridViewCell cell = new DataGridViewComboBoxCell();
+                            cell.Value = dr.GetString(a).ToString();
+                            linhaDados[a] = cell.Value.ToString();
+                        }
+                        else
+                        {
+                            linhaDados[a] = dr.GetString(a).ToString();
+                        }
+                        
+                    }
+                    if (dr.GetFieldType(a).ToString() == "System.Decimal")
+                    {
+
+                        linhaDados[a] = dr.GetString(a).ToString();
+                    }
+                }
+
+                //atribui a linha ao datagridview
+                dgvLocacao.Rows.Add(linhaDados);
+            }
+
+            conexao.Close();
         }
 
         private Locacao Recuperar(int codigo, FbConnection conexao, FbTransaction transacao)
