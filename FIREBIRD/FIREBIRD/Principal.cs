@@ -8,26 +8,27 @@ using System.Text;
 using System.Windows.Forms;
 using Data;
 using Data.Classes;
+using Control;
 
 namespace FIREBIRD
 {
     public partial class Principal : Form
     {
-        FilmeDAO filmeDao;
-        ClienteDAO clienteDao;
-        LocacaoDAO locacaoDao;
+        ControleFilme controleFilme;
+        ControleCliente controleCliente;
+        ControleLocacao controleLocacao;
 
         public Principal()
         {
             InitializeComponent();
 
-            filmeDao = new FilmeDAO();
-            clienteDao = new ClienteDAO();
-            locacaoDao = new LocacaoDAO();
+            controleCliente = new ControleCliente();
+            controleFilme = new ControleFilme();
+            controleLocacao = new ControleLocacao();
 
-            filmeDao.preencherDataGridView(this.dgvFilmes);
-            clienteDao.preencherDataGridView(this.dgvClientes);
-            locacaoDao.preencherDataGridView(this.dgvLocacao);
+            controleFilme.preencherDataGridView(this.dgvFilmes);
+            controleCliente.preencherDataGridView(this.dgvClientes);
+            controleLocacao.preencherDataGridView(this.dgvLocacao);
             
         }
 
@@ -35,21 +36,21 @@ namespace FIREBIRD
         {
             this.dgvFilmes.Rows.Clear();
             this.dgvFilmes.Columns.Clear();
-            filmeDao.preencherDataGridView(this.dgvFilmes);
+            controleFilme.preencherDataGridView(this.dgvFilmes);
         }
 
         public void CarregarLocacoes()
         {
             this.dgvLocacao.Rows.Clear();
             this.dgvLocacao.Columns.Clear();
-            locacaoDao.preencherDataGridView(this.dgvLocacao);
+            controleLocacao.preencherDataGridView(this.dgvLocacao);
         }
 
         public void CarregarClientes()
         {
             this.dgvClientes.Rows.Clear();
-            this.dgvLocacao.Columns.Clear();
-            clienteDao.preencherDataGridView(this.dgvClientes);
+            this.dgvClientes.Columns.Clear();
+            controleCliente.preencherDataGridView(this.dgvClientes);
         }
 
         private void bLocInserir_Click(object sender, EventArgs e)
@@ -68,9 +69,9 @@ namespace FIREBIRD
 
                 if (codigo != null)
                 {
-                    locacaoDao.Remover(Convert.ToInt32(codigo));
+                    controleLocacao.Remover(Convert.ToInt32(codigo));
+                    this.CarregarLocacoes();
                     MessageBox.Show("A locação foi removida com sucesso!");
-
                 }
                 else
                 {
@@ -94,26 +95,28 @@ namespace FIREBIRD
 
                 if (codigo != null)
                 {
-                    Locacao locacao = locacaoDao.Recuperar(Convert.ToInt32(codigo));
+                    Locacao locacao = controleLocacao.Recuperar(Convert.ToInt32(codigo));
 
                     if(dgvLocacao.Rows[dgvLocacao.SelectedCells[0].RowIndex].Cells[3].Value.ToString().Equals("Pendente")){
 
-                        locacaoDao.Atualizar(Convert.ToInt32(codigo), 2);
+                        controleLocacao.Atualizar(Convert.ToInt32(codigo), 2);
                     }
-                    else if(dgvLocacao.Rows[dgvLocacao.SelectedCells[0].RowIndex].Cells[3].Value.ToString().Equals("Disponivel")){
+                    else if(dgvLocacao.Rows[dgvLocacao.SelectedCells[0].RowIndex].Cells[3].Value.ToString().Equals("Disponível")){
 
-                        locacaoDao.Atualizar(Convert.ToInt32(codigo), 1);
+                        controleLocacao.Atualizar(Convert.ToInt32(codigo), 1);
                     }
 
+                    this.CarregarLocacoes();
+                    MessageBox.Show("Status da locação atualizada com sucesso!.");
                 }
                 else
                 {
-                    MessageBox.Show("Não há cliente selecionado.");
+                    MessageBox.Show("Não há locação selecionada.");
                 }
             }
             else
             {
-                MessageBox.Show("Não há cliente selecionado.");
+                MessageBox.Show("Não há locação selecionada.");
             }
         }
 
@@ -133,9 +136,9 @@ namespace FIREBIRD
                 String codigo = (String)dgvFilmes.Rows[dgvFilmes.SelectedCells[0].RowIndex].Cells[0].Value;
 
                 if(codigo != null){
-                 
-                    Filme filme = filmeDao.Recuperar(Convert.ToInt32(codigo));
-                    TelaAtualizarFilme telaAtualizarFilme = new TelaAtualizarFilme(filme);
+
+                    Filme filme = controleFilme.Recuperar(Convert.ToInt32(codigo));
+                    TelaAtualizarFilme telaAtualizarFilme = new TelaAtualizarFilme(filme, this);
                     telaAtualizarFilme.ShowDialog();
                     
                 }
@@ -167,10 +170,9 @@ namespace FIREBIRD
 
                 if (cpf != null)
                 {
-                    Cliente cliente = clienteDao.Recuperar(cpf);
-                    TelaAtualizarCliente telaAtualizarCliente = new TelaAtualizarCliente(cliente);
+                    Cliente cliente = controleCliente.Recuperar(cpf);
+                    TelaAtualizarCliente telaAtualizarCliente = new TelaAtualizarCliente(cliente, this);
                     telaAtualizarCliente.ShowDialog();
-
                 }
                 else
                 {
@@ -192,32 +194,22 @@ namespace FIREBIRD
 
             if (celulasSelecionadasCount > 0)
             {
-                String strAnterior = "";
-                for (int i = 0; i < celulasSelecionadasCount; i++)
+                String codigo = (String)dgvFilmes.Rows[dgvFilmes.SelectedCells[0].RowIndex].Cells[0].Value;
+
+                if (codigo != null)
                 {
-
-                    String codigo = (String)dgvFilmes.Rows[dgvFilmes.SelectedCells[i].RowIndex].Cells[0].Value;
-
-                    if (codigo != null)
-                    {
-                        if (!codigo.Equals(strAnterior))
-                        {
-                            filmeDao.Remover(Convert.ToInt32(codigo));
-                            strAnterior = codigo;
-                            MessageBox.Show("O filme foi removido com sucesso!");
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Não há filmes selecionados.");
-                        break;
-                    }
+                    controleFilme.Remover(Convert.ToInt32(codigo));
+                    this.CarregarFilmes();
+                    MessageBox.Show("O filme foi removido com sucesso!");
                 }
-
+                else
+                {
+                    MessageBox.Show("Não há filme selecionado.");
+                }
             }
             else
             {
-                MessageBox.Show("Não há filmes selecionados.");
+                MessageBox.Show("Não há filme selecionado.");
             }
         }
 
@@ -232,7 +224,8 @@ namespace FIREBIRD
 
                 if (cpf != null)
                 {
-                    clienteDao.Remover(cpf);
+                    controleCliente.Remover(cpf);
+                    this.CarregarClientes();
                     MessageBox.Show("O cliente foi removido com sucesso!");
 
                 }
@@ -247,6 +240,34 @@ namespace FIREBIRD
             }
 
         }
+
+        private void dgvLocacao_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            int celulasSelecionadasCount = dgvLocacao.GetCellCount(DataGridViewElementStates.Selected);
+
+            if (celulasSelecionadasCount > 0)
+            {
+                String codigo = (String)dgvLocacao.Rows[dgvLocacao.SelectedCells[0].RowIndex].Cells[0].Value;
+
+                if (codigo != null)
+                {
+                    Locacao locacao = controleLocacao.Recuperar(Convert.ToInt32(codigo));
+                    TelaExibirLocacao telaExibirLocacao = new TelaExibirLocacao(locacao);
+                    telaExibirLocacao.ShowDialog();
+                    
+                }
+                else
+                {
+                    MessageBox.Show("Não há locação selecionada.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Não há locação selecionada.");
+            }
+        }
+
+        
                
     }
 }

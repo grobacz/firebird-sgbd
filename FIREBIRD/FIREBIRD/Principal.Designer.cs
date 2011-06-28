@@ -85,6 +85,7 @@
             this.dgvLocacao.Name = "dgvLocacao";
             this.dgvLocacao.Size = new System.Drawing.Size(585, 279);
             this.dgvLocacao.TabIndex = 3;
+            this.dgvLocacao.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvLocacao_CellMouseDoubleClick);
             // 
             // bLocAtualizar
             // 
