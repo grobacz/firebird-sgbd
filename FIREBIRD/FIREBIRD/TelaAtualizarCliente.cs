@@ -8,19 +8,22 @@ using System.Text;
 using System.Windows.Forms;
 using Data.Classes;
 using Data;
+using Control;
 
 namespace FIREBIRD
 {
     public partial class TelaAtualizarCliente : Form
     {
-        ClienteDAO clienteDao;
+        ControleCliente controleCliente;
         String cpfAntigo;
+        Form principal;
 
-        public TelaAtualizarCliente(Cliente cliente)
+        public TelaAtualizarCliente(Cliente cliente, Form pai)
         {
             InitializeComponent();
-            this.clienteDao = new ClienteDAO();
+            this.controleCliente = new ControleCliente();
             cpfAntigo = cliente.Cpf;
+            principal = pai;
 
             this.tbNomeCliente.Text = cliente.Nome;
             this.tbCpfCliente.Text = cliente.Cpf;
@@ -41,7 +44,7 @@ namespace FIREBIRD
                 String telefone = this.tbTelefoneCliente.Text;
                 //TODO foto
 
-                clienteDao.Atualizar(cpfAntigo, cpf, nome, endereco, telefone, dataNascimento);
+                controleCliente.Atualizar(cpfAntigo, cpf, nome, endereco, telefone, dataNascimento);
 
                 this.Close();
 
@@ -51,5 +54,12 @@ namespace FIREBIRD
                 MessageBox.Show(ex.ToString());
             }
         }
+
+        private void TelaAtualizarCliente_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ((Principal)principal).CarregarClientes();
+        }
+
+
     }
 }

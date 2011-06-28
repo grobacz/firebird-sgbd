@@ -151,6 +151,7 @@
             this.Controls.Add(this.label1);
             this.Name = "TelaAtualizarCliente";
             this.Text = "Atualizar Cliente";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.TelaAtualizarCliente_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 
