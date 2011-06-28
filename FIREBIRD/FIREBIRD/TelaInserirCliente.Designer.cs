@@ -103,6 +103,7 @@
             // tbDataNasc
             // 
             this.tbDataNasc.Location = new System.Drawing.Point(136, 95);
+            this.tbDataNasc.MaxLength = 10;
             this.tbDataNasc.Name = "tbDataNasc";
             this.tbDataNasc.Size = new System.Drawing.Size(100, 20);
             this.tbDataNasc.TabIndex = 7;
@@ -110,6 +111,7 @@
             // tbCpfCliente
             // 
             this.tbCpfCliente.Location = new System.Drawing.Point(289, 95);
+            this.tbCpfCliente.MaxLength = 11;
             this.tbCpfCliente.Name = "tbCpfCliente";
             this.tbCpfCliente.Size = new System.Drawing.Size(144, 20);
             this.tbCpfCliente.TabIndex = 8;

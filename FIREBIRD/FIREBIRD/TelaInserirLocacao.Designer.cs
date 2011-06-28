@@ -35,22 +35,24 @@
             this.cbClientes = new System.Windows.Forms.ComboBox();
             this.lCliente = new System.Windows.Forms.Label();
             this.bInserirLocacao = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lbTodosFilmes
             // 
             this.lbTodosFilmes.FormattingEnabled = true;
-            this.lbTodosFilmes.Location = new System.Drawing.Point(12, 68);
+            this.lbTodosFilmes.Location = new System.Drawing.Point(12, 81);
             this.lbTodosFilmes.Name = "lbTodosFilmes";
-            this.lbTodosFilmes.Size = new System.Drawing.Size(204, 212);
+            this.lbTodosFilmes.Size = new System.Drawing.Size(204, 199);
             this.lbTodosFilmes.TabIndex = 0;
             // 
             // lbFilmesLocar
             // 
             this.lbFilmesLocar.FormattingEnabled = true;
-            this.lbFilmesLocar.Location = new System.Drawing.Point(264, 68);
+            this.lbFilmesLocar.Location = new System.Drawing.Point(264, 81);
             this.lbFilmesLocar.Name = "lbFilmesLocar";
-            this.lbFilmesLocar.Size = new System.Drawing.Size(204, 212);
+            this.lbFilmesLocar.Size = new System.Drawing.Size(204, 199);
             this.lbFilmesLocar.TabIndex = 1;
             // 
             // bSetaAdd
@@ -98,12 +100,33 @@
             this.bInserirLocacao.TabIndex = 6;
             this.bInserirLocacao.Text = "Inserir Locação";
             this.bInserirLocacao.UseVisualStyleBackColor = true;
+            this.bInserirLocacao.Click += new System.EventHandler(this.bInserirLocacao_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(264, 62);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(43, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "A locar:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 62);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(96, 13);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "Filmes disponíveis:";
             // 
             // TelaInserirLocacao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(480, 340);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.bInserirLocacao);
             this.Controls.Add(this.lCliente);
             this.Controls.Add(this.cbClientes);
@@ -127,5 +150,7 @@
         private System.Windows.Forms.ComboBox cbClientes;
         private System.Windows.Forms.Label lCliente;
         private System.Windows.Forms.Button bInserirLocacao;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }

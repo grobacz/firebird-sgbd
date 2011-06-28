@@ -108,6 +108,7 @@
             // tbAnoLancamentoFilme
             // 
             this.tbAnoLancamentoFilme.Location = new System.Drawing.Point(307, 56);
+            this.tbAnoLancamentoFilme.MaxLength = 4;
             this.tbAnoLancamentoFilme.Name = "tbAnoLancamentoFilme";
             this.tbAnoLancamentoFilme.Size = new System.Drawing.Size(55, 20);
             this.tbAnoLancamentoFilme.TabIndex = 7;
