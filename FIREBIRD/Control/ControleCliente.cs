@@ -40,7 +40,7 @@ namespace Control
 
         public void Remover(string cpf)
         {
-            this.Remover(cpf);
+            this.clienteDao.Remover(cpf);
         }
 
         public void preencherDataGridView(DataGridView dgvClientes)
