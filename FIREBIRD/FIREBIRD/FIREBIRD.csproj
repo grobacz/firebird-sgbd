@@ -72,6 +72,10 @@
     <Compile Include="TelaAtualizarFilme.Designer.cs">
       <DependentUpon>TelaAtualizarFilme.cs</DependentUpon>
     </Compile>
+    <Compile Include="TelaExibirLocacao.cs" />
+    <Compile Include="TelaExibirLocacao.Designer.cs">
+      <DependentUpon>TelaExibirLocacao.cs</DependentUpon>
+    </Compile>
     <Compile Include="TelaInserirCliente.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -108,6 +112,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TelaAtualizarFilme.resx">
       <DependentUpon>TelaAtualizarFilme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TelaExibirLocacao.resx">
+      <DependentUpon>TelaExibirLocacao.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TelaInserirCliente.resx">
       <DependentUpon>TelaInserirCliente.cs</DependentUpon>
