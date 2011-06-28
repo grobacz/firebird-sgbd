@@ -77,6 +77,7 @@ namespace Data
                 {
                     dgvFilmes.Columns.Add(dr.GetName(i).ToString(), dr.GetName(i).ToString());
                     dgvFilmes.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+                    dgvFilmes.Columns[i].ReadOnly = true;
                 }
             }
 

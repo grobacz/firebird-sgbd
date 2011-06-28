@@ -1,6 +1,7 @@
 ﻿using System;
 using Data.Classes;
 using System.Collections.Generic;
+using System.Windows.Forms;
 namespace Data
 {
     public interface IFilmeDAO
@@ -10,5 +11,6 @@ namespace Data
         IList<Filme> Listar();
         Filme Recuperar(int codigo);
         void Remover(int codigo);
+        void preencherDataGridView(DataGridView dgvFilmes);
     }
 }

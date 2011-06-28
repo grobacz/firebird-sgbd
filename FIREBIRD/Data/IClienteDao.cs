@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Data.Classes;
+using System.Windows.Forms;
 
 namespace Data
 {
@@ -13,5 +14,6 @@ namespace Data
         IList<Cliente> Listar();
         Cliente Recuperar(string cpf);
         void Remover(string cpf);
+        void preencherDataGridView(DataGridView dgvClientes);
     }
 }
