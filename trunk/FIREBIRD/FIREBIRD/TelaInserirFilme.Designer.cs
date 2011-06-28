@@ -183,6 +183,7 @@
             this.Controls.Add(this.label1);
             this.Name = "TelaInserirFilme";
             this.Text = "Inserir Filme";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.TelaInserirFilme_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCapa)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

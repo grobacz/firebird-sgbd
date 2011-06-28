@@ -16,13 +16,15 @@ namespace FIREBIRD
         ClienteDAO clienteDao;
         FilmeDAO filmeDao;
         LocacaoDAO locacaoDao;
+        Form principal;
 
-        public TelaInserirLocacao()
+        public TelaInserirLocacao(Form pai)
         {
             InitializeComponent();
             clienteDao = new ClienteDAO();
             filmeDao = new FilmeDAO();
             locacaoDao = new LocacaoDAO();
+            principal = pai;
 
             IList<Cliente> clientes = clienteDao.Listar();
             IList<Filme> filmes = filmeDao.ListarNaoLocados();
@@ -73,7 +75,16 @@ namespace FIREBIRD
             }
 
             locacaoDao.Inserir(cpf, filmesALocar);
+
+            MessageBox.Show("Locação inserida com sucesso!");
+
+            this.Close();
             
+        }
+
+        private void TelaInserirLocacao_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ((Principal)principal).CarregarLocacoes();
         }
     }
 }

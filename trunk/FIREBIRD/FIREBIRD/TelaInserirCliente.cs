@@ -13,12 +13,14 @@ namespace FIREBIRD
     public partial class TelaInserirCliente : Form
     {
         ClienteDAO clienteDao;
+        Form principal;
 
-        public TelaInserirCliente()
+        public TelaInserirCliente(Form pai)
         {
             InitializeComponent();
             clienteDao = new ClienteDAO();
-            
+
+            principal = pai;
         }
 
         private void bInserirCliente_Click(object sender, EventArgs e)
@@ -33,11 +35,19 @@ namespace FIREBIRD
 
                 clienteDao.Inserir(cpf, nome, endereco, telefone, dataNascimento);
 
+                MessageBox.Show("Cliente inserido com sucesso");
+
                 this.Close();
             }
-            catch(Exception ex){
-                MessageBox.Show(ex.ToString());
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
+        }
+
+        private void TelaInserirCliente_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ((Principal)principal).CarregarClientes();
         }
     }
 }

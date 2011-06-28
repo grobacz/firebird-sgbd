@@ -136,6 +136,7 @@
             this.Controls.Add(this.lbTodosFilmes);
             this.Name = "TelaInserirLocacao";
             this.Text = "TelaInserirLocacao";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.TelaInserirLocacao_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -151,6 +151,7 @@
             this.Controls.Add(this.label1);
             this.Name = "TelaInserirCliente";
             this.Text = "Inserir Cliente";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.TelaInserirCliente_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

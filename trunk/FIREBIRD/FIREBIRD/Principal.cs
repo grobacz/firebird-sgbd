@@ -31,9 +31,30 @@ namespace FIREBIRD
             
         }
 
+        public void CarregarFilmes()
+        {
+            this.dgvFilmes.Rows.Clear();
+            this.dgvFilmes.Columns.Clear();
+            filmeDao.preencherDataGridView(this.dgvFilmes);
+        }
+
+        public void CarregarLocacoes()
+        {
+            this.dgvLocacao.Rows.Clear();
+            this.dgvLocacao.Columns.Clear();
+            locacaoDao.preencherDataGridView(this.dgvLocacao);
+        }
+
+        public void CarregarClientes()
+        {
+            this.dgvClientes.Rows.Clear();
+            this.dgvLocacao.Columns.Clear();
+            clienteDao.preencherDataGridView(this.dgvClientes);
+        }
+
         private void bLocInserir_Click(object sender, EventArgs e)
         {
-            TelaInserirLocacao telaInserirLocacao = new TelaInserirLocacao();
+            TelaInserirLocacao telaInserirLocacao = new TelaInserirLocacao(this);
             telaInserirLocacao.ShowDialog();
         }
 
@@ -98,7 +119,7 @@ namespace FIREBIRD
 
         private void bFilmesInserir_Click(object sender, EventArgs e)
         {
-            TelaInserirFilme telaInserirFime = new TelaInserirFilme();
+            TelaInserirFilme telaInserirFime = new TelaInserirFilme(this);
             telaInserirFime.ShowDialog();
         }
 
@@ -131,7 +152,7 @@ namespace FIREBIRD
 
         private void bClientesInserir_Click(object sender, EventArgs e)
         {
-            TelaInserirCliente telaInserirCliente = new TelaInserirCliente();
+            TelaInserirCliente telaInserirCliente = new TelaInserirCliente(this);
             telaInserirCliente.ShowDialog();
         }
 
