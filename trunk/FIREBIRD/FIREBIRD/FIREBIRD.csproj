@@ -118,6 +118,7 @@
     <EmbeddedResource Include="TelaInserirLocacao.resx">
       <DependentUpon>TelaInserirLocacao.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="data\LOCADORA.FDB" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
