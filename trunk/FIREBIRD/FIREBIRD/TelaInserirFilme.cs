@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Data;
+using System.IO;
 
 namespace FIREBIRD
 {
@@ -49,13 +50,12 @@ namespace FIREBIRD
                 String genero = cbGeneroFilme.SelectedItem.ToString();
                 int anoLancamento = Convert.ToInt32(tbAnoLancamentoFilme.Text);
                 //TODO inserir imagem no banco com blob
+                byte[] imagem = this.convertImagemParaArrayByte(tbUrlImagemFilme.Text);
                 decimal preco = Convert.ToDecimal(tbPreco.Text);
 
                 filmeDao.Inserir(nome, preco, genero, anoLancamento, null);
-
-                MessageBox.Show("Filme inserido com sucesso!");
-
                 this.Close();
+                MessageBox.Show("Filme inserido com sucesso!");
 
             }
             catch (Exception ex)
@@ -67,6 +67,15 @@ namespace FIREBIRD
         private void TelaInserirFilme_FormClosed(object sender, FormClosedEventArgs e)
         {
             ((Principal)principal).CarregarFilmes();
+        }
+
+        private byte[] convertImagemParaArrayByte(string path)
+        {
+            FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read);
+            byte[] imageData = new byte[fs.Length];
+            fs.Read(imageData, 0, System.Convert.ToInt32(fs.Length));
+            fs.Close();
+            return imageData;
         }
     }
 }
