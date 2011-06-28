@@ -34,15 +34,15 @@ namespace FIREBIRD
                 String telefone = tbTelefoneCliente.Text;
 
                 clienteDao.Inserir(cpf, nome, endereco, telefone, dataNascimento);
-
-                MessageBox.Show("Cliente inserido com sucesso");
-
                 this.Close();
+                MessageBox.Show("Cliente inserido com sucesso!");
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+
         }
 
         private void TelaInserirCliente_FormClosed(object sender, FormClosedEventArgs e)
