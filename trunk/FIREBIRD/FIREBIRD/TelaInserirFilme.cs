@@ -42,7 +42,6 @@ namespace FIREBIRD
         {
             try
             {
-
                 String nome = tbNomeFilme.Text;
                 String genero = cbGeneroFilme.SelectedItem.ToString();
                 int anoLancamento = Convert.ToInt32(tbAnoLancamentoFilme.Text);

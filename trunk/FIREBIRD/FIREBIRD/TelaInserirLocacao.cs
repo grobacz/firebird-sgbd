@@ -6,15 +6,36 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Data;
+using Data.Classes;
 
 namespace FIREBIRD
 {
     public partial class TelaInserirLocacao : Form
     {
+        ClienteDAO clienteDao;
+        FilmeDAO filmeDao;
+        LocacaoDAO locacaoDao;
+
         public TelaInserirLocacao()
         {
             InitializeComponent();
+            clienteDao = new ClienteDAO();
+            filmeDao = new FilmeDAO();
+            locacaoDao = new LocacaoDAO();
 
+            IList<Cliente> clientes = clienteDao.Listar();
+            IList<Filme> filmes = filmeDao.ListarNaoLocados();
+
+            foreach (Cliente c in clientes)
+            {
+                cbClientes.Items.Add(c.Cpf + " - " + c.Nome);
+            }
+
+            foreach (Filme f in filmes)
+            {
+                lbTodosFilmes.Items.Add(f.Codigo + " - " + f.Nome);
+            }
         }
 
         private void bSetaAdd_Click(object sender, EventArgs e)
@@ -33,6 +54,26 @@ namespace FIREBIRD
                 this.lbTodosFilmes.Items.Add(lbFilmesLocar.SelectedItem);
                 this.lbFilmesLocar.Items.Remove(lbFilmesLocar.SelectedItem);
             }
+        }
+
+        private void bInserirLocacao_Click(object sender, EventArgs e)
+        {
+
+            int indexCpf = cbClientes.Text.IndexOf('-');
+            String cpf = cbClientes.Text.Substring(0, indexCpf);
+
+            List<int> filmesALocar = new List<int>();
+            int nFilmes = lbFilmesLocar.Items.Count;
+
+            for (int i = 0; i < nFilmes; i++)
+            {
+                int indexCodigo = lbFilmesLocar.Items[i].ToString().IndexOf('-');
+                String codigo = lbFilmesLocar.Items[i].ToString().Substring(0, indexCodigo);
+                filmesALocar.Add(Convert.ToInt32(codigo));
+            }
+
+            locacaoDao.Inserir(cpf, filmesALocar);
+            
         }
     }
 }

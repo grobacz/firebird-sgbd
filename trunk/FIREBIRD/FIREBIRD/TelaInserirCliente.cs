@@ -12,22 +12,32 @@ namespace FIREBIRD
 {
     public partial class TelaInserirCliente : Form
     {
+        ClienteDAO clienteDao;
+
         public TelaInserirCliente()
         {
             InitializeComponent();
-
+            clienteDao = new ClienteDAO();
             
         }
 
         private void bInserirCliente_Click(object sender, EventArgs e)
         {
-            String nome = tbNomeCliente.Text;
-            String endereco = tbEnderecaoCliente.Text;
-            DateTime dataNascimento = Convert.ToDateTime(tbDataNasc.Text);
-            String cpf = tbCpfCliente.Text;
-            String telefone = tbTelefoneCliente.Text;
+            try
+            {
+                String nome = tbNomeCliente.Text;
+                String endereco = tbEnderecaoCliente.Text;
+                DateTime dataNascimento = Convert.ToDateTime(tbDataNasc.Text);
+                String cpf = tbCpfCliente.Text;
+                String telefone = tbTelefoneCliente.Text;
 
-            
+                clienteDao.Inserir(cpf, nome, endereco, telefone, dataNascimento);
+
+                this.Close();
+            }
+            catch(Exception ex){
+                MessageBox.Show(ex.ToString());
+            }
         }
     }
 }

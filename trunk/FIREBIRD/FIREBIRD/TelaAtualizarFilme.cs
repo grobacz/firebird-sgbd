@@ -48,8 +48,6 @@ namespace FIREBIRD
 
                 this.Close();
 
-                Principal principal = new Principal();
-
             }catch(Exception ex){
                 MessageBox.Show(ex.ToString());
             }
