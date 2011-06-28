@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Data;
 using Data.Classes;
+using System.Windows.Forms;
 
 namespace Control
 {
@@ -39,6 +40,11 @@ namespace Control
         public void Remover(int codigo)
         {
             filmeDao.Remover(codigo);
+        }
+
+        public void preencherDataGridView(DataGridView dgvFilmes)
+        {
+            filmeDao.preencherDataGridView(dgvFilmes);
         }
 
     }
