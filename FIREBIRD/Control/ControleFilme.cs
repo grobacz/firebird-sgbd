@@ -8,7 +8,6 @@ using Data.Classes;
 namespace Control
 {
     public class ControleFilme : IFilmeDAO
-
     {
         private FilmeDAO filmeDao;
 

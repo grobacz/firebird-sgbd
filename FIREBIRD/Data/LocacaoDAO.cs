@@ -41,7 +41,7 @@ namespace Data
 
         public void Inserir(string cpfCliente, IList<int> codigoFilmes)
         {
-            // TODO: Verificar se o filme está disponível (se for necessário realmente)
+            // TODO: Verificar se o filme está disponível (se for necessário realmente). Colocar na camada de negócios!
 
             FbConnection conexao = Connection.Instance.GetConnection();
             conexao.Open();
