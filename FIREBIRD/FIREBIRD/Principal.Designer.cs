@@ -31,9 +31,6 @@
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageLocacao = new System.Windows.Forms.TabPage();
             this.dgvLocacao = new System.Windows.Forms.DataGridView();
-            this.codigo = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.status = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.Cliente = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bLocAtualizar = new System.Windows.Forms.Button();
             this.bLocRemover = new System.Windows.Forms.Button();
             this.bLocInserir = new System.Windows.Forms.Button();
@@ -43,7 +40,7 @@
             this.bFilmesRemover = new System.Windows.Forms.Button();
             this.bFilmesInserir = new System.Windows.Forms.Button();
             this.tabPageCliente = new System.Windows.Forms.TabPage();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvClientes = new System.Windows.Forms.DataGridView();
             this.bClientesAtualizar = new System.Windows.Forms.Button();
             this.bClientesRemover = new System.Windows.Forms.Button();
             this.bClientesInserir = new System.Windows.Forms.Button();
@@ -53,7 +50,7 @@
             this.tabPageFilme.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFilmes)).BeginInit();
             this.tabPageCliente.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl
@@ -84,32 +81,10 @@
             // dgvLocacao
             // 
             this.dgvLocacao.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvLocacao.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.codigo,
-            this.status,
-            this.Cliente});
             this.dgvLocacao.Location = new System.Drawing.Point(17, 16);
             this.dgvLocacao.Name = "dgvLocacao";
             this.dgvLocacao.Size = new System.Drawing.Size(585, 279);
             this.dgvLocacao.TabIndex = 3;
-            // 
-            // codigo
-            // 
-            this.codigo.HeaderText = "Código";
-            this.codigo.Name = "codigo";
-            this.codigo.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.codigo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // status
-            // 
-            this.status.HeaderText = "Status";
-            this.status.Name = "status";
-            // 
-            // Cliente
-            // 
-            this.Cliente.HeaderText = "Cliente";
-            this.Cliente.Name = "Cliente";
-            this.Cliente.ReadOnly = true;
             // 
             // bLocAtualizar
             // 
@@ -196,7 +171,7 @@
             // 
             // tabPageCliente
             // 
-            this.tabPageCliente.Controls.Add(this.dataGridView1);
+            this.tabPageCliente.Controls.Add(this.dgvClientes);
             this.tabPageCliente.Controls.Add(this.bClientesAtualizar);
             this.tabPageCliente.Controls.Add(this.bClientesRemover);
             this.tabPageCliente.Controls.Add(this.bClientesInserir);
@@ -208,13 +183,13 @@
             this.tabPageCliente.Text = "Clientes";
             this.tabPageCliente.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // dgvClientes
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(17, 16);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(585, 279);
-            this.dataGridView1.TabIndex = 3;
+            this.dgvClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvClientes.Location = new System.Drawing.Point(17, 16);
+            this.dgvClientes.Name = "dgvClientes";
+            this.dgvClientes.Size = new System.Drawing.Size(585, 279);
+            this.dgvClientes.TabIndex = 3;
             // 
             // bClientesAtualizar
             // 
@@ -234,6 +209,7 @@
             this.bClientesRemover.TabIndex = 1;
             this.bClientesRemover.Text = "Remover";
             this.bClientesRemover.UseVisualStyleBackColor = true;
+            this.bClientesRemover.Click += new System.EventHandler(this.bClientesRemover_Click);
             // 
             // bClientesInserir
             // 
@@ -259,7 +235,7 @@
             this.tabPageFilme.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvFilmes)).EndInit();
             this.tabPageCliente.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -278,12 +254,9 @@
         private System.Windows.Forms.Button bFilmesRemover;
         private System.Windows.Forms.Button bFilmesInserir;
         private System.Windows.Forms.TabPage tabPageCliente;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvClientes;
         private System.Windows.Forms.Button bClientesAtualizar;
         private System.Windows.Forms.Button bClientesRemover;
         private System.Windows.Forms.Button bClientesInserir;
-        private System.Windows.Forms.DataGridViewLinkColumn codigo;
-        private System.Windows.Forms.DataGridViewComboBoxColumn status;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Cliente;
     }
 }

@@ -14,15 +14,20 @@ namespace FIREBIRD
     public partial class Principal : Form
     {
         FilmeDAO filmeDao;
+        ClienteDAO clienteDao;
+        LocacaoDAO locacaoDao;
 
         public Principal()
         {
             InitializeComponent();
 
             filmeDao = new FilmeDAO();
-            filmeDao.preencherDataGridView(this.dgvFilmes);
+            clienteDao = new ClienteDAO();
+            locacaoDao = new LocacaoDAO();
 
-            
+            filmeDao.preencherDataGridView(this.dgvFilmes);
+            clienteDao.preencherDataGridView(this.dgvClientes);
+            locacaoDao.preencherDataGridView(this.dgvLocacao);
             
         }
 
@@ -34,12 +39,61 @@ namespace FIREBIRD
 
         private void bLocRemover_Click(object sender, EventArgs e)
         {
-            
+            int celulasSelecionadasCount = dgvLocacao.GetCellCount(DataGridViewElementStates.Selected);
+
+            if (celulasSelecionadasCount > 0)
+            {
+                String codigo = (String)dgvLocacao.Rows[dgvLocacao.SelectedCells[0].RowIndex].Cells[0].Value;
+
+                if (codigo != null)
+                {
+                    locacaoDao.Remover(Convert.ToInt32(codigo));
+                    MessageBox.Show("A locação foi removida com sucesso!");
+
+                }
+                else
+                {
+                    MessageBox.Show("Não há locação selecionada.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Não há locação selecionada.");
+            }
+
         }
 
         private void bLocAtualizar_Click(object sender, EventArgs e)
         {
-            
+            int celulasSelecionadasCount = dgvLocacao.GetCellCount(DataGridViewElementStates.Selected);
+
+            if (celulasSelecionadasCount > 0)
+            {
+                String codigo = (String)dgvLocacao.Rows[dgvLocacao.SelectedCells[0].RowIndex].Cells[0].Value;
+
+                if (codigo != null)
+                {
+                    Locacao locacao = locacaoDao.Recuperar(Convert.ToInt32(codigo));
+
+                    if(dgvLocacao.Rows[dgvLocacao.SelectedCells[0].RowIndex].Cells[3].Value.ToString().Equals("Pendente")){
+
+                        locacaoDao.Atualizar(Convert.ToInt32(codigo), 2);
+                    }
+                    else if(dgvLocacao.Rows[dgvLocacao.SelectedCells[0].RowIndex].Cells[3].Value.ToString().Equals("Disponivel")){
+
+                        locacaoDao.Atualizar(Convert.ToInt32(codigo), 1);
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Não há cliente selecionado.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Não há cliente selecionado.");
+            }
         }
 
         private void bFilmesInserir_Click(object sender, EventArgs e)
@@ -83,8 +137,31 @@ namespace FIREBIRD
 
         private void bClientesAtualizar_Click(object sender, EventArgs e)
         {
-            TelaAtualizarCliente telaAtualizarCliente = new TelaAtualizarCliente();
-            telaAtualizarCliente.ShowDialog();
+
+            int celulasSelecionadasCount = dgvClientes.GetCellCount(DataGridViewElementStates.Selected);
+
+            if (celulasSelecionadasCount > 0)
+            {
+                String cpf = (String)dgvClientes.Rows[dgvClientes.SelectedCells[0].RowIndex].Cells[0].Value;
+
+                if (cpf != null)
+                {
+                    Cliente cliente = clienteDao.Recuperar(cpf);
+                    TelaAtualizarCliente telaAtualizarCliente = new TelaAtualizarCliente(cliente);
+                    telaAtualizarCliente.ShowDialog();
+
+                }
+                else
+                {
+                    MessageBox.Show("Não há cliente selecionado.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Não há cliente selecionado.");
+            }
+
+            
                
         }
 
@@ -106,6 +183,7 @@ namespace FIREBIRD
                         {
                             filmeDao.Remover(Convert.ToInt32(codigo));
                             strAnterior = codigo;
+                            MessageBox.Show("O filme foi removido com sucesso!");
                         }
                     }
                     else
@@ -120,6 +198,33 @@ namespace FIREBIRD
             {
                 MessageBox.Show("Não há filmes selecionados.");
             }
+        }
+
+        private void bClientesRemover_Click(object sender, EventArgs e)
+        {
+
+            int celulasSelecionadasCount = dgvClientes.GetCellCount(DataGridViewElementStates.Selected);
+
+            if (celulasSelecionadasCount > 0)
+            {
+                String cpf = (String)dgvClientes.Rows[dgvClientes.SelectedCells[0].RowIndex].Cells[0].Value;
+
+                if (cpf != null)
+                {
+                    clienteDao.Remover(cpf);
+                    MessageBox.Show("O cliente foi removido com sucesso!");
+
+                }
+                else
+                {
+                    MessageBox.Show("Não há clientes selecionados.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Não há clientes selecionados.");
+            }
+
         }
                
     }
