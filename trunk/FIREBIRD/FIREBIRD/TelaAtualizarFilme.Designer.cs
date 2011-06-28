@@ -182,6 +182,7 @@
             this.Controls.Add(this.label1);
             this.Name = "TelaAtualizarFilme";
             this.Text = "TelaAtualizarFilme";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.TelaAtualizarFilme_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCapa)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -8,18 +8,23 @@ using System.Text;
 using System.Windows.Forms;
 using Data;
 using Data.Classes;
+using Control;
+using System.IO;
 
 namespace FIREBIRD
 {
     public partial class TelaAtualizarFilme : Form
     {
-        FilmeDAO filmeDao;
+        ControleFilme controleFilme;
         int codigo;
+        Form principal;
 
-        public TelaAtualizarFilme(Filme filmeSelecionado)
+
+        public TelaAtualizarFilme(Filme filmeSelecionado, Form pai)
         {
-            this.filmeDao = new FilmeDAO();
+            this.controleFilme = new ControleFilme();
             InitializeComponent();
+            this.principal = pai;
 
             this.cbGeneroFilme.Items.Add("Ação");
             this.cbGeneroFilme.Items.Add("Comédia");
@@ -44,7 +49,7 @@ namespace FIREBIRD
                 String genero = cbGeneroFilme.SelectedItem.ToString();
                 //TODO foto
 
-                filmeDao.Atualizar(codigo, nome, preco, genero, anoLancamento, null);
+                controleFilme.Atualizar(codigo, nome, preco, genero, anoLancamento, null);
 
                 this.Close();
 
@@ -61,6 +66,16 @@ namespace FIREBIRD
                 this.tbUrlImagemFilme.Text = this.openFileDialog1.FileName;
                 this.pictureBoxCapa.ImageLocation = this.openFileDialog1.FileName;
             }
+        }
+
+        private void TelaAtualizarFilme_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ((Principal)principal).CarregarFilmes();
+        }
+
+        private FileStream convertArrayByteToFile(byte[] imageByte)
+        {
+            return null;
         }
 
     }
