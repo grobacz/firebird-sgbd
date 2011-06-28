@@ -7,8 +7,25 @@ namespace Data.Classes
 {
     public static class Genero
     {
+        private static IList<string> _generos = new List<string> 
+        { 
+            ACAO,
+            ANIMACAO, 
+            AVENTURA, 
+            COMEDIA, 
+            DOCUMENTARIO, 
+            DRAMA,
+            FICCAO,
+            MUSICAL, 
+            ROMANCE,
+            SUSPENSE,
+            TERROR
+        };
+
+        public static IList<string> Generos { get { return _generos; } }
+
         public const string ACAO = "Ação";
-        public const string ANIMACAo = "Animação";
+        public const string ANIMACAO = "Animação";
         public const string AVENTURA = "Aventura";
         public const string COMEDIA = "Comédia";
         public const string DOCUMENTARIO = "Documentário";
