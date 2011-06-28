@@ -23,13 +23,12 @@ namespace FIREBIRD
 
             filmeDao = new FilmeDAO();
 
-            principal = pai;                
+            principal = pai;
 
-            this.cbGeneroFilme.Items.Add("Ação");
-            this.cbGeneroFilme.Items.Add("Comédia");
-            this.cbGeneroFilme.Items.Add("Desenho Animado");
-            this.cbGeneroFilme.Items.Add("Romance");
-            this.cbGeneroFilme.Items.Add("Terror");
+            foreach (string genero in Data.Classes.Genero.Generos)
+            {
+                this.cbGeneroFilme.Items.Add(genero);   
+            }
 
         }
 
