@@ -60,7 +60,7 @@ namespace FIREBIRD
         {
 
             int indexCpf = cbClientes.Text.IndexOf('-');
-            String cpf = cbClientes.Text.Substring(0, indexCpf);
+            String cpf = cbClientes.Text.Substring(0, indexCpf - 1);
 
             List<int> filmesALocar = new List<int>();
             int nFilmes = lbFilmesLocar.Items.Count;
