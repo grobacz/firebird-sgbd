@@ -60,25 +60,43 @@ namespace FIREBIRD
 
         private void bInserirLocacao_Click(object sender, EventArgs e)
         {
-
+            
             int indexCpf = cbClientes.Text.IndexOf('-');
-            String cpf = cbClientes.Text.Substring(0, indexCpf - 1);
-
-            List<int> filmesALocar = new List<int>();
-            int nFilmes = lbFilmesLocar.Items.Count;
-
-            for (int i = 0; i < nFilmes; i++)
+            if (indexCpf != -1)
             {
-                int indexCodigo = lbFilmesLocar.Items[i].ToString().IndexOf('-');
-                String codigo = lbFilmesLocar.Items[i].ToString().Substring(0, indexCodigo);
-                filmesALocar.Add(Convert.ToInt32(codigo));
+                String cpf = cbClientes.Text.Substring(0, indexCpf - 1);
+
+                List<int> filmesALocar = new List<int>();
+                int nFilmes = lbFilmesLocar.Items.Count;
+
+                if (nFilmes > 0)
+                {
+                    for (int i = 0; i < nFilmes; i++)
+                    {
+                        int indexCodigo = lbFilmesLocar.Items[i].ToString().IndexOf('-');
+                        String codigo = lbFilmesLocar.Items[i].ToString().Substring(0, indexCodigo);
+                        filmesALocar.Add(Convert.ToInt32(codigo));
+                    }
+
+                    locacaoDao.Inserir(cpf, filmesALocar);
+                    this.Close();
+                    MessageBox.Show("Locação inserida com sucesso!");
+                }
+                else
+                {
+                    MessageBox.Show("Selecione pelo menos um filme para locar!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Selecione um cliente.");
             }
 
-            locacaoDao.Inserir(cpf, filmesALocar);
+            
 
-            MessageBox.Show("Locação inserida com sucesso!");
+            
 
-            this.Close();
+            
             
         }
 
