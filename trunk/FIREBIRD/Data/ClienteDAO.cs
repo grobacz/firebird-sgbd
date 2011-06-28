@@ -5,6 +5,7 @@ using System.Text;
 using Data.Classes;
 using FirebirdSql.Data.FirebirdClient;
 using System.Data;
+using System.Windows.Forms;
 
 namespace Data
 {
@@ -89,6 +90,62 @@ namespace Data
             conexao.Close();
 
             return clientes;
+        }
+
+        public void preencherDataGridView(DataGridView dgvClientes)
+        {
+            FbConnection conexao = Connection.Instance.GetConnection();
+            conexao.Open();
+
+            FbTransaction transacao = conexao.BeginTransaction();
+            string sql = "SELECT cpf, nome, endereco, telefone, data_nascimento FROM cliente;";
+
+            FbCommand comando = new FbCommand(sql, conexao, transacao);
+            FbDataReader dr = comando.ExecuteReader();
+
+            int nColunas = dr.FieldCount;
+
+            for (int i = 0; i < nColunas; i++)
+            {
+                dgvClientes.Columns.Add(dr.GetName(i).ToString(), dr.GetName(i).ToString());
+                dgvClientes.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+            }
+
+            string[] linhaDados = new string[nColunas];
+
+            while (dr.Read())
+            {
+                //percorre cada uma das colunas
+                for (int a = 0; a < nColunas; a++)
+                {
+
+                    if (dr.GetFieldType(a).ToString() == "System.Int32")
+                    {
+                        linhaDados[a] = dr.GetInt32(a).ToString();
+                    }
+                    else if (dr.GetFieldType(a).ToString() == "System.String")
+                    {
+                        linhaDados[a] = dr.GetString(a).ToString();
+                    }
+                    else if (dr.GetFieldType(a).ToString() == "System.Decimal")
+                    {
+                        linhaDados[a] = dr.GetString(a).ToString();
+                    }
+                    else if (dr.GetFieldType(a).ToString() == "System.DateTime")
+                    {
+                        string data = dr.GetString(a).ToString();
+                        data = data.Substring(0, 10);
+
+                        linhaDados[a] = data;
+                    }
+                }
+
+                //atribui a linha ao datagridview
+                dgvClientes.Rows.Add(linhaDados);
+            }
+
+            conexao.Close();
+
         }
 
         public Cliente Recuperar(string cpf)
