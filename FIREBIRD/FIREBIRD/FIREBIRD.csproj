@@ -72,7 +72,9 @@
     <Compile Include="TelaAtualizarFilme.Designer.cs">
       <DependentUpon>TelaAtualizarFilme.cs</DependentUpon>
     </Compile>
-    <Compile Include="TelaExibirLocacao.cs" />
+    <Compile Include="TelaExibirLocacao.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="TelaExibirLocacao.Designer.cs">
       <DependentUpon>TelaExibirLocacao.cs</DependentUpon>
     </Compile>

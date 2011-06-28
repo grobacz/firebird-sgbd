@@ -49,11 +49,10 @@ namespace FIREBIRD
                 String nome = tbNomeFilme.Text;
                 String genero = cbGeneroFilme.SelectedItem.ToString();
                 int anoLancamento = Convert.ToInt32(tbAnoLancamentoFilme.Text);
-                //TODO inserir imagem no banco com blob
                 byte[] imagem = this.convertImagemParaArrayByte(tbUrlImagemFilme.Text);
                 decimal preco = Convert.ToDecimal(tbPreco.Text);
 
-                filmeDao.Inserir(nome, preco, genero, anoLancamento, null);
+                filmeDao.Inserir(nome, preco, genero, anoLancamento, imagem);
                 this.Close();
                 MessageBox.Show("Filme inserido com sucesso!");
 
