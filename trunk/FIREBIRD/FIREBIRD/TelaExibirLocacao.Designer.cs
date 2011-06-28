@@ -85,6 +85,7 @@
             // lCodigo
             // 
             this.lCodigo.AutoSize = true;
+            this.lCodigo.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lCodigo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lCodigo.ForeColor = System.Drawing.Color.Maroon;
             this.lCodigo.Location = new System.Drawing.Point(55, 23);
@@ -96,6 +97,7 @@
             // lCliente
             // 
             this.lCliente.AutoSize = true;
+            this.lCliente.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lCliente.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lCliente.ForeColor = System.Drawing.Color.Maroon;
             this.lCliente.Location = new System.Drawing.Point(55, 52);
