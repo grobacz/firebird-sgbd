@@ -66,12 +66,5 @@ namespace FIREBIRD.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-        
-        internal static System.Drawing.Bitmap capas {
-            get {
-                object obj = ResourceManager.GetObject("capas", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
     }
 }
