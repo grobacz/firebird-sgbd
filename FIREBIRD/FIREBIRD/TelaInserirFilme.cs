@@ -14,19 +14,22 @@ namespace FIREBIRD
     {
 
         FilmeDAO filmeDao;
+        Form principal;
 
-        public TelaInserirFilme()
+        public TelaInserirFilme(Form pai)
         {
             InitializeComponent();
 
             filmeDao = new FilmeDAO();
+
+            principal = pai;                
 
             this.cbGeneroFilme.Items.Add("Ação");
             this.cbGeneroFilme.Items.Add("Comédia");
             this.cbGeneroFilme.Items.Add("Desenho Animado");
             this.cbGeneroFilme.Items.Add("Romance");
             this.cbGeneroFilme.Items.Add("Terror");
-            
+
         }
 
         private void bBrowser_Click(object sender, EventArgs e)
@@ -49,13 +52,21 @@ namespace FIREBIRD
                 decimal preco = Convert.ToDecimal(tbPreco.Text);
 
                 filmeDao.Inserir(nome, preco, genero, anoLancamento, null);
+
+                MessageBox.Show("Filme inserido com sucesso!");
+
                 this.Close();
-                
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show(ex.Message);
             }
+        }
+
+        private void TelaInserirFilme_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ((Principal)principal).CarregarFilmes();
         }
     }
 }
