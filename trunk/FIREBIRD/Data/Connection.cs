@@ -49,25 +49,25 @@ namespace Data
 
         
 
-        public void TransactionParameter(configTransacao index)
+        public void TransactionParameter(ConfigTransacao index)
         {
             FbTransactionOptions configTran = new FbTransactionOptions();
 
             switch(index)
             {
-                case configTransacao.Consistency:
+                case ConfigTransacao.Consistency:
                     configTran.TransactionBehavior = FbTransactionBehavior.Consistency;
                     break;
-                case configTransacao.Concurrency_NOWAIT:
+                case ConfigTransacao.Concurrency_NOWAIT:
                     configTran.TransactionBehavior = FbTransactionBehavior.Concurrency | FbTransactionBehavior.NoWait;
                     break;
-                case configTransacao.Concurrency_WAIT:
+                case ConfigTransacao.Concurrency_WAIT:
                     configTran.TransactionBehavior = FbTransactionBehavior.Concurrency | FbTransactionBehavior.Wait;
                     break;
-                case configTransacao.ReadCommitted_NOWAIT:
+                case ConfigTransacao.ReadCommitted_NOWAIT:
                     configTran.TransactionBehavior = FbTransactionBehavior.ReadCommitted | FbTransactionBehavior.NoWait;
                     break;
-                case configTransacao.ReadCommitted_WAIT:
+                case ConfigTransacao.ReadCommitted_WAIT:
                     configTran.TransactionBehavior = FbTransactionBehavior.ReadCommitted | FbTransactionBehavior.Wait;
                     break;
                 default:
@@ -76,28 +76,15 @@ namespace Data
             }
             connection.BeginTransaction(configTran);
 
-          /*  connection.BeginTransaction(new FbTransactionOptions()
-            {
-                TransactionBehavior = FbTransactionBehavior.ReadCommitted,  // etc.
-                LockTables = new Dictionary<string, FbTransactionBehavior>
-                {
-                    { "TABLE_1", FbTransactionBehavior.LockWrite | FbTransactionBehavior.Shared },
-                    { "TABLE_2", FbTransactionBehavior.LockWrite | FbTransactionBehavior.Exclusive }
-                }
-            });
-            */
-
         }
 
-        public enum configTransacao
+        public enum ConfigTransacao
         {
             Consistency = 1,
             Concurrency_WAIT = 2,
             Concurrency_NOWAIT = 3,
             ReadCommitted_WAIT = 4,
             ReadCommitted_NOWAIT = 5
-
-
         };
     }
 }
