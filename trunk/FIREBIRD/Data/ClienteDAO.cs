@@ -109,6 +109,7 @@ namespace Data
             {
                 dgvClientes.Columns.Add(dr.GetName(i).ToString(), dr.GetName(i).ToString());
                 dgvClientes.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+                dgvClientes.Columns[i].ReadOnly = true;
             }
 
             string[] linhaDados = new string[nColunas];

@@ -101,20 +101,33 @@ namespace Data
 
             FbTransaction transacao = conexao.BeginTransaction();
 
-            string sql = "SELECT * FROM locacao;";
+            string sql = "SELECT * FROM locacao";
 
             FbCommand comando = new FbCommand(sql, conexao, transacao);
             FbDataReader dr = comando.ExecuteReader();
 
             int nColunas = dr.FieldCount;
 
+
             for (int i = 0; i < nColunas; i++)
             {
-                dgvLocacao.Columns.Add(dr.GetName(i).ToString(), dr.GetName(i).ToString());
-                dgvLocacao.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;   
+                if (!dr.GetName(i).ToString().Equals("STATUS"))
+                {
+                    dgvLocacao.Columns.Add(dr.GetName(i).ToString(), dr.GetName(i).ToString());
+                    dgvLocacao.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+                    dgvLocacao.Columns[i].ReadOnly = true;
+                }
             }
 
             string[] linhaDados = new string[nColunas];
+
+            DataGridViewComboBoxCell cellCombo = new DataGridViewComboBoxCell();
+            cellCombo.Items.Add("Pendente");
+            cellCombo.Items.Add("Disponível");
+            DataGridViewColumn columnStatus = new DataGridViewColumn(cellCombo);
+            dgvLocacao.Columns.Add(columnStatus);
+            dgvLocacao.Columns[3].HeaderText = "STATUS";
+
 
             while (dr.Read())
             {
@@ -125,30 +138,29 @@ namespace Data
                     {
                         if (dr.GetName(a).ToString().Equals("CODIGO"))
                         {
-                            DataGridViewCell cell = new DataGridViewLinkCell();
-                            cell.Value = dr.GetInt32(a).ToString();
-                            linhaDados[a] = cell.Value.ToString();
+                            linhaDados[a] = dr.GetInt32(a).ToString();
+                        }
+                        else if (dr.GetName(a).ToString().Equals("STATUS"))
+                        {
+                            if (dr.GetInt32(a) == 1)
+                            {
+                                linhaDados[a] = "Disponível";
+                            }
+                            else if (dr.GetInt32(a) == 2)
+                            {
+                                linhaDados[a] = "Pendente";
+                            }
                         }
                         else
                         {
                             linhaDados[a] = dr.GetInt32(a).ToString();
                         }
                     }
-                    if (dr.GetFieldType(a).ToString() == "System.String")
+                    else if (dr.GetFieldType(a).ToString() == "System.String")
                     {
-                        if (dr.GetName(a).ToString().Equals("STATUS"))
-                        {
-                            DataGridViewCell cell = new DataGridViewComboBoxCell();
-                            cell.Value = dr.GetString(a).ToString();
-                            linhaDados[a] = cell.Value.ToString();
-                        }
-                        else
-                        {
-                            linhaDados[a] = dr.GetString(a).ToString();
-                        }
-                        
+                        linhaDados[a] = dr.GetString(a).ToString();
                     }
-                    if (dr.GetFieldType(a).ToString() == "System.Decimal")
+                    else if (dr.GetFieldType(a).ToString() == "System.Decimal")
                     {
 
                         linhaDados[a] = dr.GetString(a).ToString();
