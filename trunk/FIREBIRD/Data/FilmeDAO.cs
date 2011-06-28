@@ -237,5 +237,44 @@ namespace Data
 
             return filme;
         }
+
+        public IList<Filme> ListarNaoLocados()
+        {
+            IList<Filme> filmes = new List<Filme>();
+
+            FbConnection conexao = Connection.Instance.GetConnection();
+            conexao.Open();
+
+            FbTransaction transacao = conexao.BeginTransaction();
+
+            string sql = "SELECT codigo, nome, preco, genero, ano_lancamento, imagem FROM filme;";
+
+            FbCommand comando = new FbCommand(sql, conexao, transacao);
+            FbDataReader reader = comando.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Filme filme = new Filme()
+                {
+                    Codigo = reader.GetInt32(0),
+                    Nome = reader.GetString(1),
+                    Preco = reader.GetDecimal(2),
+                    Genero = reader.GetString(3),
+                    Ano = reader.GetInt32(4),
+                };
+
+                if (!reader.IsDBNull(5))
+                {
+                    filme.Imagem = (byte[])reader["imagem"];
+                }
+
+                filmes.Add(filme);
+
+            }
+
+            conexao.Close();
+
+            return filmes;
+        }
     }
 }
