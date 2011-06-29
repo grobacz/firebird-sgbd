@@ -27,8 +27,6 @@ namespace FIREBIRD
             InitializeComponent();
             this.principal = pai;
 
-            
-
             this.cbGeneroFilme.Items.Add("Ação");
             this.cbGeneroFilme.Items.Add("Comédia");
             this.cbGeneroFilme.Items.Add("Desenho Animado");
@@ -50,13 +48,9 @@ namespace FIREBIRD
 
         public Image byteArrayToImage(byte[] byteArrayIn)
         {
-            
             MemoryStream ms = new MemoryStream(byteArrayIn);
             Image returnImage = Image.FromStream(ms);
             return returnImage;
-            
-
-            
         }
 
 
