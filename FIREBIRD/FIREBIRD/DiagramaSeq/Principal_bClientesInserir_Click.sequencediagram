@@ -1,0 +1,334 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SequenceDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" dslVersion="1.0.0.0" Id="3f77565d-86c8-4257-a31a-d06d6f68680d" name="Principal_bClientesInserir_Click" mode="DotNet" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner">
+  <packagedElements>
+    <packageHasNamedElement>
+      <interaction Id="c1b5f227-0d37-416e-a4b0-cafe5377fd4e" name="Principal_bClientesInserir_Click" collapseFragmentsFlag="false" isActiveClass="false" isAbstract="false" isLeaf="false" isReentrant="false">
+        <fragments>
+          <behaviorExecutionSpecification Id="553f5684-4420-45e2-a27f-05ed8e2db5b9" name="BehaviorExecutionSpecification">
+            <coveredLifelines>
+              <lifelineMoniker Id="fd3ef6fd-e21a-4219-ac8c-587049a7b946" LastKnownName="this : Principal" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker Id="4d682f8b-963a-4050-b6a6-aa279b224193" LastKnownName="ExecutionOccurrenceSpecification" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker Id="78d60e43-08f4-46a4-abe1-7ccf5a389df0" LastKnownName="ExecutionOccurrenceSpecification" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker Id="91d5e6db-c372-4c4d-9b7a-988e80957122" LastKnownName="MessageOccurrenceSpecification" />
+              <messageOccurrenceSpecificationMoniker Id="505f02a4-68a4-43cc-a38e-24434f1d11bc" LastKnownName="MessageOccurrenceSpecification" />
+              <messageOccurrenceSpecificationMoniker Id="1f84abc4-fa0d-431c-a152-1cf8d454248f" LastKnownName="MessageOccurrenceSpecification" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification Id="78d60e43-08f4-46a4-abe1-7ccf5a389df0" name="ExecutionOccurrenceSpecification">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="3715903c-f265-4aea-b66f-785cdbe51921" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="fd3ef6fd-e21a-4219-ac8c-587049a7b946" LastKnownName="this : Principal" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="91d5e6db-c372-4c4d-9b7a-988e80957122" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="fd3ef6fd-e21a-4219-ac8c-587049a7b946" LastKnownName="this : Principal" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <lostFoundTarget Id="736886c7-01c6-49a9-b97e-5321fb625a8b" name="LostFoundTarget" />
+          <behaviorExecutionSpecification Id="e2d2ba51-e76f-4626-919e-8bf36105fff2" name="BehaviorExecutionSpecification">
+            <coveredLifelines>
+              <lifelineMoniker Id="4b005d0f-9743-49d9-898e-29a04e7d6227" LastKnownName="telaInserirCliente : TelaInserirCliente" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker Id="bfcf16ad-d3b0-4b28-88d6-772b8cd79486" LastKnownName="ExecutionOccurrenceSpecification" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker Id="bd28940a-89d0-4fb9-9a79-b1e29f372946" LastKnownName="ExecutionOccurrenceSpecification" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker Id="1fa126a1-4f0a-4c1b-a94e-6311d56b0ceb" LastKnownName="MessageOccurrenceSpecification" />
+              <messageOccurrenceSpecificationMoniker Id="71fe3333-aa1f-4653-be79-a074f5d7a057" LastKnownName="MessageOccurrenceSpecification" />
+              <executionOccurrenceSpecificationMoniker Id="2e671614-de5f-4001-9960-801934061f9c" LastKnownName="ExecutionOccurrenceSpecification" />
+              <executionOccurrenceSpecificationMoniker Id="d6efe064-7a8d-41eb-8294-8b17599d6409" LastKnownName="ExecutionOccurrenceSpecification" />
+              <messageOccurrenceSpecificationMoniker Id="41d6f183-f9c2-495a-a125-6fc227d3f46c" LastKnownName="MessageOccurrenceSpecification" />
+              <messageOccurrenceSpecificationMoniker Id="8e8a0875-e394-4893-acaf-d8a280950c49" LastKnownName="MessageOccurrenceSpecification" />
+              <messageOccurrenceSpecificationMoniker Id="6f05aa34-fc22-465a-88b0-471106aba0cd" LastKnownName="MessageOccurrenceSpecification" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification Id="bd28940a-89d0-4fb9-9a79-b1e29f372946" name="ExecutionOccurrenceSpecification">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="8f59a048-e62e-4320-b68b-c026e57b13d8" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="4b005d0f-9743-49d9-898e-29a04e7d6227" LastKnownName="telaInserirCliente : TelaInserirCliente" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="1fa126a1-4f0a-4c1b-a94e-6311d56b0ceb" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="4b005d0f-9743-49d9-898e-29a04e7d6227" LastKnownName="telaInserirCliente : TelaInserirCliente" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="505f02a4-68a4-43cc-a38e-24434f1d11bc" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="fd3ef6fd-e21a-4219-ac8c-587049a7b946" LastKnownName="this : Principal" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="71fe3333-aa1f-4653-be79-a074f5d7a057" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="4b005d0f-9743-49d9-898e-29a04e7d6227" LastKnownName="telaInserirCliente : TelaInserirCliente" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <behaviorExecutionSpecification Id="6f8e75fc-9812-43e5-8d54-6a330fbd5af3" name="BehaviorExecutionSpecification">
+            <coveredLifelines>
+              <lifelineMoniker Id="4b005d0f-9743-49d9-898e-29a04e7d6227" LastKnownName="telaInserirCliente : TelaInserirCliente" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker Id="d6efe064-7a8d-41eb-8294-8b17599d6409" LastKnownName="ExecutionOccurrenceSpecification" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker Id="2e671614-de5f-4001-9960-801934061f9c" LastKnownName="ExecutionOccurrenceSpecification" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker Id="4800c717-1c3c-4fd5-99c4-5a1960e4fc5b" LastKnownName="MessageOccurrenceSpecification" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification Id="2e671614-de5f-4001-9960-801934061f9c" name="ExecutionOccurrenceSpecification">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="c1dd8b57-bc99-42fc-a8f3-3a804cdc5d68" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="4b005d0f-9743-49d9-898e-29a04e7d6227" LastKnownName="telaInserirCliente : TelaInserirCliente" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="4800c717-1c3c-4fd5-99c4-5a1960e4fc5b" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="4b005d0f-9743-49d9-898e-29a04e7d6227" LastKnownName="telaInserirCliente : TelaInserirCliente" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification Id="d6efe064-7a8d-41eb-8294-8b17599d6409" name="ExecutionOccurrenceSpecification">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="dcf17bc2-9b00-44d4-8ba5-9ac715dbf585" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="4b005d0f-9743-49d9-898e-29a04e7d6227" LastKnownName="telaInserirCliente : TelaInserirCliente" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification Id="f8d9938f-9116-4bf2-9bb2-27641ae9452a" name="BehaviorExecutionSpecification">
+            <coveredLifelines>
+              <lifelineMoniker Id="3147656c-638a-402a-bf68-48cb0219fab4" LastKnownName="telaInserirCliente.clienteDao : ClienteDAO" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker Id="dc7908bc-dff6-45c4-8949-b19dcdd40b5b" LastKnownName="ExecutionOccurrenceSpecification" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker Id="e9b659ea-5e3d-4149-a4d8-92e07e916d13" LastKnownName="ExecutionOccurrenceSpecification" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker Id="cc0afc1b-70d9-44ae-8a1d-92ce8e305b60" LastKnownName="MessageOccurrenceSpecification" />
+              <messageOccurrenceSpecificationMoniker Id="7b914d4f-0075-4b79-8841-98f5b428ea19" LastKnownName="MessageOccurrenceSpecification" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification Id="e9b659ea-5e3d-4149-a4d8-92e07e916d13" name="ExecutionOccurrenceSpecification">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="85f9701b-e029-416e-831e-ece5c828a60e" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="3147656c-638a-402a-bf68-48cb0219fab4" LastKnownName="telaInserirCliente.clienteDao : ClienteDAO" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="41d6f183-f9c2-495a-a125-6fc227d3f46c" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="4b005d0f-9743-49d9-898e-29a04e7d6227" LastKnownName="telaInserirCliente : TelaInserirCliente" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="cc0afc1b-70d9-44ae-8a1d-92ce8e305b60" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="3147656c-638a-402a-bf68-48cb0219fab4" LastKnownName="telaInserirCliente.clienteDao : ClienteDAO" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="7b914d4f-0075-4b79-8841-98f5b428ea19" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="3147656c-638a-402a-bf68-48cb0219fab4" LastKnownName="telaInserirCliente.clienteDao : ClienteDAO" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="8e8a0875-e394-4893-acaf-d8a280950c49" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="4b005d0f-9743-49d9-898e-29a04e7d6227" LastKnownName="telaInserirCliente : TelaInserirCliente" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification Id="dc7908bc-dff6-45c4-8949-b19dcdd40b5b" name="ExecutionOccurrenceSpecification">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="74a89f06-7284-4bcd-af85-a1394d2b8767" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="3147656c-638a-402a-bf68-48cb0219fab4" LastKnownName="telaInserirCliente.clienteDao : ClienteDAO" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="1f84abc4-fa0d-431c-a152-1cf8d454248f" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="fd3ef6fd-e21a-4219-ac8c-587049a7b946" LastKnownName="this : Principal" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="6f05aa34-fc22-465a-88b0-471106aba0cd" name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker Id="4b005d0f-9743-49d9-898e-29a04e7d6227" LastKnownName="telaInserirCliente : TelaInserirCliente" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification Id="bfcf16ad-d3b0-4b28-88d6-772b8cd79486" name="ExecutionOccurrenceSpecification">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="48e48846-bd46-4f00-a8f6-4278946e4c0b" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="4b005d0f-9743-49d9-898e-29a04e7d6227" LastKnownName="telaInserirCliente : TelaInserirCliente" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <executionOccurrenceSpecification Id="4d682f8b-963a-4050-b6a6-aa279b224193" name="ExecutionOccurrenceSpecification">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker Id="9fbf564b-19be-40f9-9876-2b1729879ef0" LastKnownName="ExecutionEvent" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker Id="fd3ef6fd-e21a-4219-ac8c-587049a7b946" LastKnownName="this : Principal" />
+            </covered>
+          </executionOccurrenceSpecification>
+        </fragments>
+        <lifelines>
+          <lifeline Id="fd3ef6fd-e21a-4219-ac8c-587049a7b946" name="this : Principal" isActor="false" lifelineDisplayName="this : Principal" referencedInstance="(Assembly=&quot;$(1bedfe81-c23e-414d-8e38-700f07920ad3.OutputPathUri)&quot; Namespace=FIREBIRD Type=Principal ObjectInstance=&quot;Object instance 3&quot;)" referencedType="FIREBIRD.Principal">
+            <referencesInternal>
+              <reference Id="84737b16-6f56-4f70-aa7a-1e39259b0c95" handle="+ Id.Equals(&quot;Microsoft.Solution.ClassView&quot;) /&#xD;&#xA;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Namespace=FIREBIRD)&quot;)/&#xD;&#xA;&quot;Microsoft.Contains&quot;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Assembly=&amp;quot;$(1bedfe81-c23e-414d-8e38-700f07920ad3.OutputPathUri)&amp;quot; Namespace=FIREBIRD Type=Principal)&quot;)" tag="DGQL" />
+              <reference Id="8e341bd0-9ee3-40d9-ab81-7127f582c0a7" handle="(Assembly=&quot;$(1bedfe81-c23e-414d-8e38-700f07920ad3.OutputPathUri)&quot; Namespace=FIREBIRD Type=Principal)" tag="DGML" />
+            </referencesInternal>
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker Id="78d60e43-08f4-46a4-abe1-7ccf5a389df0" LastKnownName="ExecutionOccurrenceSpecification" />
+              <executionOccurrenceSpecificationMoniker Id="4d682f8b-963a-4050-b6a6-aa279b224193" LastKnownName="ExecutionOccurrenceSpecification" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline Id="4b005d0f-9743-49d9-898e-29a04e7d6227" name="telaInserirCliente : TelaInserirCliente" isActor="false" lifelineDisplayName="telaInserirCliente : TelaInserirCliente" referencedInstance="(Assembly=&quot;$(1bedfe81-c23e-414d-8e38-700f07920ad3.OutputPathUri)&quot; Namespace=FIREBIRD Type=TelaInserirCliente ObjectInstance=&quot;Object instance 4&quot;)" referencedType="FIREBIRD.TelaInserirCliente">
+            <referencesInternal>
+              <reference Id="c32c1792-4978-477d-a1cc-f7e88cc9f645" handle="+ Id.Equals(&quot;Microsoft.Solution.ClassView&quot;) /&#xD;&#xA;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Namespace=FIREBIRD)&quot;)/&#xD;&#xA;&quot;Microsoft.Contains&quot;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Assembly=&amp;quot;$(1bedfe81-c23e-414d-8e38-700f07920ad3.OutputPathUri)&amp;quot; Namespace=FIREBIRD Type=TelaInserirCliente)&quot;)" tag="DGQL" />
+              <reference Id="90cdebb6-7033-4de7-8d0f-266e832846f3" handle="(Assembly=&quot;$(1bedfe81-c23e-414d-8e38-700f07920ad3.OutputPathUri)&quot; Namespace=FIREBIRD Type=TelaInserirCliente)" tag="DGML" />
+            </referencesInternal>
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker Id="bd28940a-89d0-4fb9-9a79-b1e29f372946" LastKnownName="ExecutionOccurrenceSpecification" />
+              <executionOccurrenceSpecificationMoniker Id="bfcf16ad-d3b0-4b28-88d6-772b8cd79486" LastKnownName="ExecutionOccurrenceSpecification" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline Id="3147656c-638a-402a-bf68-48cb0219fab4" name="telaInserirCliente.clienteDao : ClienteDAO" isActor="false" lifelineDisplayName="telaInserirCliente.clienteDao : ClienteDAO" referencedInstance="(Assembly=&quot;$(49dec70a-8b9f-499b-a637-c3a60abeb845.OutputPathUri)&quot; Namespace=Data Type=ClienteDAO ObjectInstance=&quot;Object instance 165&quot;)" referencedType="Data.ClienteDAO">
+            <referencesInternal>
+              <reference Id="5c8d5258-feeb-4501-b96b-8e9e01945835" handle="+ Id.Equals(&quot;Microsoft.Solution.ClassView&quot;) /&#xD;&#xA;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Namespace=Data)&quot;)/&#xD;&#xA;&quot;Microsoft.Contains&quot;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Assembly=&amp;quot;$(49dec70a-8b9f-499b-a637-c3a60abeb845.OutputPathUri)&amp;quot; Namespace=Data Type=ClienteDAO)&quot;)" tag="DGQL" />
+              <reference Id="6301d308-f95c-4189-b3c6-772f743d451a" handle="(Assembly=&quot;$(49dec70a-8b9f-499b-a637-c3a60abeb845.OutputPathUri)&quot; Namespace=Data Type=ClienteDAO)" tag="DGML" />
+            </referencesInternal>
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker Id="e9b659ea-5e3d-4149-a4d8-92e07e916d13" LastKnownName="ExecutionOccurrenceSpecification" />
+              <executionOccurrenceSpecificationMoniker Id="dc7908bc-dff6-45c4-8949-b19dcdd40b5b" LastKnownName="ExecutionOccurrenceSpecification" />
+            </topLevelOccurrences>
+          </lifeline>
+        </lifelines>
+        <messages>
+          <message Id="4b151265-391b-4736-a5f8-f15e009cdb76" name="bClientesInserir_Click" messageKind="Found" messageSort="AsynchCall" createSelfMessage="false">
+            <referencesInternal>
+              <reference Id="b83dd063-f9ad-4fe5-a04a-a12c75d8406b" handle="+ Id.Equals(&quot;Microsoft.Solution.ClassView&quot;) /&#xD;&#xA;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Namespace=FIREBIRD)&quot;)/&#xD;&#xA;&quot;Microsoft.Contains&quot;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Assembly=&amp;quot;$(1bedfe81-c23e-414d-8e38-700f07920ad3.OutputPathUri)&amp;quot; Namespace=FIREBIRD Type=Principal)&quot;)/&#xD;&#xA;&quot;Microsoft.Contains&quot;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Assembly=&amp;quot;$(1bedfe81-c23e-414d-8e38-700f07920ad3.OutputPathUri)&amp;quot; Namespace=FIREBIRD Type=Principal Member=(Name=bClientesInserir_Click OverloadingParameters=[(Assembly=&amp;quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/Profile/Client/mscorlib.dll&amp;quot; Namespace=System Type=Object),(Assembly=&amp;quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/Profile/Client/mscorlib.dll&amp;quot; Namespace=System Type=EventArgs)]))&quot;)" tag="DGQL" />
+              <reference Id="f3d6c6a0-28c0-4db3-9df5-cf5deb465a58" handle="(Assembly=&quot;$(1bedfe81-c23e-414d-8e38-700f07920ad3.OutputPathUri)&quot; Namespace=FIREBIRD Type=Principal Member=(Name=bClientesInserir_Click OverloadingParameters=[(Assembly=&quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/Profile/Client/mscorlib.dll&quot; Namespace=System Type=Object),(Assembly=&quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/Profile/Client/mscorlib.dll&quot; Namespace=System Type=EventArgs)]))" tag="DGML" />
+            </referencesInternal>
+            <sendEvent>
+              <lostFoundTargetMoniker Id="736886c7-01c6-49a9-b97e-5321fb625a8b" LastKnownName="LostFoundTarget" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker Id="91d5e6db-c372-4c4d-9b7a-988e80957122" LastKnownName="MessageOccurrenceSpecification" />
+            </receiveEvent>
+          </message>
+          <message Id="65c33672-e0e0-4030-ac94-7246ae76e44d" name="Create TelaInserirCliente" messageKind="Complete" messageSort="CreateMessage" createSelfMessage="false" signatureText="new TelaInserirCliente(this)">
+            <referencesInternal>
+              <reference Id="fb802584-d553-4ab9-93ee-54bb2f0dc230" handle="+ Id.Equals(&quot;Microsoft.Solution.ClassView&quot;) /&#xD;&#xA;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Namespace=FIREBIRD)&quot;)/&#xD;&#xA;&quot;Microsoft.Contains&quot;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Assembly=&amp;quot;$(1bedfe81-c23e-414d-8e38-700f07920ad3.OutputPathUri)&amp;quot; Namespace=FIREBIRD Type=TelaInserirCliente)&quot;)/&#xD;&#xA;&quot;Microsoft.Contains&quot;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Assembly=&amp;quot;$(1bedfe81-c23e-414d-8e38-700f07920ad3.OutputPathUri)&amp;quot; Namespace=FIREBIRD Type=TelaInserirCliente Member=(Name=.ctor OverloadingParameters=[(Assembly=&amp;quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/Profile/Client/System.Windows.Forms.dll&amp;quot; Namespace=System.Windows.Forms Type=Form)]))&quot;)" tag="DGQL" />
+              <reference Id="76767d66-394e-4990-a447-8dffb8d4ae74" handle="(Assembly=&quot;$(1bedfe81-c23e-414d-8e38-700f07920ad3.OutputPathUri)&quot; Namespace=FIREBIRD Type=TelaInserirCliente Member=(Name=.ctor OverloadingParameters=[(Assembly=&quot;$(FxReferenceAssembliesUri)/.NETFramework/v4.0/Profile/Client/System.Windows.Forms.dll&quot; Namespace=System.Windows.Forms Type=Form)]))" tag="DGML" />
+            </referencesInternal>
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker Id="505f02a4-68a4-43cc-a38e-24434f1d11bc" LastKnownName="MessageOccurrenceSpecification" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker Id="1fa126a1-4f0a-4c1b-a94e-6311d56b0ceb" LastKnownName="MessageOccurrenceSpecification" />
+            </receiveEvent>
+          </message>
+          <message Id="16a8b16c-2324-45fd-973b-28cf615eee6a" name="&lt;&lt;return&gt;&gt;" messageKind="Complete" messageSort="Reply" createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker Id="6f05aa34-fc22-465a-88b0-471106aba0cd" LastKnownName="MessageOccurrenceSpecification" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker Id="1f84abc4-fa0d-431c-a152-1cf8d454248f" LastKnownName="MessageOccurrenceSpecification" />
+            </receiveEvent>
+          </message>
+          <message Id="2bf2935d-716b-42f7-827b-ca6b47305b45" name="InitializeComponent" messageKind="Complete" messageSort="SynchCall" createSelfMessage="true" signatureText="InitializeComponent()">
+            <referencesInternal>
+              <reference Id="1cf9c883-c6ad-41e1-b7f3-e0c2a53104d0" handle="+ Id.Equals(&quot;Microsoft.Solution.ClassView&quot;) /&#xD;&#xA;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Namespace=FIREBIRD)&quot;)/&#xD;&#xA;&quot;Microsoft.Contains&quot;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Assembly=&amp;quot;$(1bedfe81-c23e-414d-8e38-700f07920ad3.OutputPathUri)&amp;quot; Namespace=FIREBIRD Type=TelaInserirCliente)&quot;)/&#xD;&#xA;&quot;Microsoft.Contains&quot;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Assembly=&amp;quot;$(1bedfe81-c23e-414d-8e38-700f07920ad3.OutputPathUri)&amp;quot; Namespace=FIREBIRD Type=TelaInserirCliente Member=InitializeComponent)&quot;)" tag="DGQL" />
+              <reference Id="3e79a778-4647-4e11-89d8-e984408104b9" handle="(Assembly=&quot;$(1bedfe81-c23e-414d-8e38-700f07920ad3.OutputPathUri)&quot; Namespace=FIREBIRD Type=TelaInserirCliente Member=InitializeComponent)" tag="DGML" />
+            </referencesInternal>
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker Id="71fe3333-aa1f-4653-be79-a074f5d7a057" LastKnownName="MessageOccurrenceSpecification" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker Id="4800c717-1c3c-4fd5-99c4-5a1960e4fc5b" LastKnownName="MessageOccurrenceSpecification" />
+            </receiveEvent>
+          </message>
+          <message Id="3d5bd1e0-dc4e-4e34-acde-d1b208312ca1" name="Create ClienteDAO" messageKind="Complete" messageSort="CreateMessage" createSelfMessage="false" signatureText="new ClienteDAO()">
+            <referencesInternal>
+              <reference Id="1c8a1d84-a4af-4074-b2c4-1feef9746360" handle="+ Id.Equals(&quot;Microsoft.Solution.ClassView&quot;) /&#xD;&#xA;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Namespace=Data)&quot;)/&#xD;&#xA;&quot;Microsoft.Contains&quot;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Assembly=&amp;quot;$(49dec70a-8b9f-499b-a637-c3a60abeb845.OutputPathUri)&amp;quot; Namespace=Data Type=ClienteDAO)&quot;)/&#xD;&#xA;&quot;Microsoft.Contains&quot;/&#xD;&#xA;+ Id.EqualsIgnoreCase(&quot;(Assembly=&amp;quot;$(49dec70a-8b9f-499b-a637-c3a60abeb845.OutputPathUri)&amp;quot; Namespace=Data Type=ClienteDAO Member=.ctor)&quot;)" tag="DGQL" />
+              <reference Id="958beece-2886-4079-acdf-4db62f1af745" handle="(Assembly=&quot;$(49dec70a-8b9f-499b-a637-c3a60abeb845.OutputPathUri)&quot; Namespace=Data Type=ClienteDAO Member=.ctor)" tag="DGML" />
+            </referencesInternal>
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker Id="41d6f183-f9c2-495a-a125-6fc227d3f46c" LastKnownName="MessageOccurrenceSpecification" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker Id="cc0afc1b-70d9-44ae-8a1d-92ce8e305b60" LastKnownName="MessageOccurrenceSpecification" />
+            </receiveEvent>
+          </message>
+          <message Id="6b8a7351-0e93-48ff-8688-13499949267e" name="&lt;&lt;return&gt;&gt;" messageKind="Complete" messageSort="Reply" createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker Id="7b914d4f-0075-4b79-8841-98f5b428ea19" LastKnownName="MessageOccurrenceSpecification" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker Id="8e8a0875-e394-4893-acaf-d8a280950c49" LastKnownName="MessageOccurrenceSpecification" />
+            </receiveEvent>
+          </message>
+        </messages>
+      </interaction>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="3715903c-f265-4aea-b66f-785cdbe51921" name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="9fbf564b-19be-40f9-9876-2b1729879ef0" name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="8f59a048-e62e-4320-b68b-c026e57b13d8" name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="48e48846-bd46-4f00-a8f6-4278946e4c0b" name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="c1dd8b57-bc99-42fc-a8f3-3a804cdc5d68" name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="dcf17bc2-9b00-44d4-8ba5-9ac715dbf585" name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="85f9701b-e029-416e-831e-ece5c828a60e" name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent Id="74a89f06-7284-4bcd-af85-a1394d2b8767" name="ExecutionEvent" />
+    </packageHasNamedElement>
+  </packagedElements>
+</SequenceDesignerModel>
