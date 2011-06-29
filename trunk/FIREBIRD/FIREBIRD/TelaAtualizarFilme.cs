@@ -18,6 +18,7 @@ namespace FIREBIRD
         ControleFilme controleFilme;
         int codigo;
         Form principal;
+        byte[] imagemMesma;
 
 
         public TelaAtualizarFilme(Filme filmeSelecionado, Form pai)
@@ -26,18 +27,38 @@ namespace FIREBIRD
             InitializeComponent();
             this.principal = pai;
 
+            
+
             this.cbGeneroFilme.Items.Add("Ação");
             this.cbGeneroFilme.Items.Add("Comédia");
             this.cbGeneroFilme.Items.Add("Desenho Animado");
             this.cbGeneroFilme.Items.Add("Romance");
             this.cbGeneroFilme.Items.Add("Terror");
 
+            imagemMesma = filmeSelecionado.Imagem;
+
             this.tbNomeFilme.Text = filmeSelecionado.Nome;
             this.tbAnoLancamentoFilme.Text = filmeSelecionado.Ano.ToString();
             this.tbPreco.Text = filmeSelecionado.Preco.ToString();
             this.cbGeneroFilme.Text = filmeSelecionado.Genero;
             this.codigo = filmeSelecionado.Codigo;
+            if (imagemMesma != null)
+            {
+                this.pictureBoxCapa.Image = this.byteArrayToImage(imagemMesma);
+            }
         }
+
+        public Image byteArrayToImage(byte[] byteArrayIn)
+        {
+            
+            MemoryStream ms = new MemoryStream(byteArrayIn);
+            Image returnImage = Image.FromStream(ms);
+            return returnImage;
+            
+
+            
+        }
+
 
         private void bAtualizarFilme_Click(object sender, EventArgs e)
         {
@@ -47,9 +68,18 @@ namespace FIREBIRD
                 int anoLancamento = Convert.ToInt32(this.tbAnoLancamentoFilme.Text);
                 Decimal preco = Convert.ToDecimal(this.tbPreco.Text);
                 String genero = cbGeneroFilme.SelectedItem.ToString();
-                //TODO foto
 
-                controleFilme.Atualizar(codigo, nome, preco, genero, anoLancamento, null);
+                if (!tbUrlImagemFilme.Text.Equals(""))
+                {
+                    byte[] imageByte = this.convertImagemParaArrayByte(this.tbUrlImagemFilme.Text);
+                    controleFilme.Atualizar(codigo, nome, preco, genero, anoLancamento, imageByte);
+                }
+                else
+                {
+                    controleFilme.Atualizar(codigo, nome, preco, genero, anoLancamento, imagemMesma);
+                }
+
+                
 
                 this.Close();
 
@@ -73,10 +103,13 @@ namespace FIREBIRD
             ((Principal)principal).CarregarFilmes();
         }
 
-        private FileStream convertArrayByteToFile(byte[] imageByte)
+        private byte[] convertImagemParaArrayByte(string path)
         {
-            return null;
+            FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read);
+            byte[] imageData = new byte[fs.Length];
+            fs.Read(imageData, 0, System.Convert.ToInt32(fs.Length));
+            fs.Close();
+            return imageData;
         }
-
     }
 }
