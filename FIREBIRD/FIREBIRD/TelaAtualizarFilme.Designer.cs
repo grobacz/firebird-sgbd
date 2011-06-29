@@ -159,6 +159,7 @@
             this.pictureBoxCapa.Location = new System.Drawing.Point(393, 12);
             this.pictureBoxCapa.Name = "pictureBoxCapa";
             this.pictureBoxCapa.Size = new System.Drawing.Size(100, 133);
+            this.pictureBoxCapa.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxCapa.TabIndex = 18;
             this.pictureBoxCapa.TabStop = false;
             // 
