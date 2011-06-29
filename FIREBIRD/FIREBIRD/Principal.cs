@@ -97,17 +97,17 @@ namespace FIREBIRD
                 {
                     Locacao locacao = controleLocacao.Recuperar(Convert.ToInt32(codigo));
 
-                    if(dgvLocacao.Rows[dgvLocacao.SelectedCells[0].RowIndex].Cells[3].Value.ToString().Equals("Pendente")){
+                    if(dgvLocacao.Rows[dgvLocacao.SelectedCells[0].RowIndex].Cells[2].Value.ToString().Equals("Pendente")){
 
                         controleLocacao.Atualizar(Convert.ToInt32(codigo), 2);
                     }
-                    else if(dgvLocacao.Rows[dgvLocacao.SelectedCells[0].RowIndex].Cells[3].Value.ToString().Equals("Disponível")){
+                    else if(dgvLocacao.Rows[dgvLocacao.SelectedCells[0].RowIndex].Cells[2].Value.ToString().Equals("Disponível")){
 
                         controleLocacao.Atualizar(Convert.ToInt32(codigo), 1);
                     }
 
                     this.CarregarLocacoes();
-                    MessageBox.Show("Status da locação atualizada com sucesso!.");
+                    MessageBox.Show("Status da locação atualizada com sucesso!");
                 }
                 else
                 {
