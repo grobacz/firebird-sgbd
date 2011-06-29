@@ -69,6 +69,9 @@ namespace FIREBIRD
 
         private byte[] convertImagemParaArrayByte(string path)
         {
+            if (string.IsNullOrEmpty(path))
+                return null;
+
             FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read);
             byte[] imageData = new byte[fs.Length];
             fs.Read(imageData, 0, System.Convert.ToInt32(fs.Length));

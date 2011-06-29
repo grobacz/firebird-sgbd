@@ -11,139 +11,176 @@ namespace Data
 {
     public class FilmeDAO : IFilmeDAO
     {
+        private Connection connection;
+
+        public FilmeDAO()
+        {
+            connection = Connection.Instance;
+        }
+
         public void Inserir(string nome, decimal preco, string genero, int ano, byte[] imagem)
         {
-            FbConnection conexao = Connection.Instance.GetConnection();
-            conexao.Open();
+            try
+            {
+                FbConnection conexao = connection.OpenConnection();
+                FbTransaction transacao = connection.GetTransaction();
 
-            FbTransaction transacao = conexao.BeginTransaction();
+                string insertSql = "INSERT INTO filme (nome, preco, genero, ano_lancamento, imagem) VALUES (@nome, @preco, @genero, @ano, @imagem);";
 
-            string insertSql = "INSERT INTO filme (nome, preco, genero, ano_lancamento, imagem) VALUES (@nome, @preco, @genero, @ano, @imagem);";
+                FbCommand comando = new FbCommand(insertSql, conexao, transacao);
+                comando.Parameters.AddWithValue("@nome", nome);
+                comando.Parameters.AddWithValue("@preco", preco);
+                comando.Parameters.AddWithValue("@genero", genero);
+                comando.Parameters.AddWithValue("@ano", ano);
+                comando.Parameters.AddWithValue("@imagem", imagem);
 
-            FbCommand comando = new FbCommand(insertSql, conexao, transacao);
-            comando.Parameters.AddWithValue("@nome", nome);
-            comando.Parameters.AddWithValue("@preco", preco);
-            comando.Parameters.AddWithValue("@genero", genero);
-            comando.Parameters.AddWithValue("@ano", ano);
-            comando.Parameters.AddWithValue("@imagem", imagem);
+                comando.ExecuteNonQuery();
+                transacao.Commit();
 
-            comando.ExecuteNonQuery();
-            transacao.Commit();
-
-            conexao.Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                connection.CloseConnection();
+            }
 
         }
 
         public void Atualizar(int codigo, string nome, decimal preco, string genero, int ano, byte[] imagem)
         {
-            FbConnection conexao = Connection.Instance.GetConnection();
-            conexao.Open();
+            try
+            {
+                FbConnection conexao = connection.OpenConnection();
+                FbTransaction transacao = connection.GetTransaction();
 
-            FbTransaction transacao = conexao.BeginTransaction();
+                string sql = "UPDATE filme SET nome = @nome, preco = @preco, genero = @genero, ano_lancamento = @ano, imagem = @imagem WHERE codigo = @codigo;";
 
-            string sql = "UPDATE filme SET nome = @nome, preco = @preco, genero = @genero, ano_lancamento = @ano, imagem = @imagem WHERE codigo = @codigo;";
+                FbCommand comando = new FbCommand(sql, conexao, transacao);
+                comando.Parameters.AddWithValue("@codigo", codigo);
+                comando.Parameters.AddWithValue("@nome", nome);
+                comando.Parameters.AddWithValue("@preco", preco);
+                comando.Parameters.AddWithValue("@genero", genero);
+                comando.Parameters.AddWithValue("@ano", ano);
+                comando.Parameters.AddWithValue("@imagem", imagem);
 
-            FbCommand comando = new FbCommand(sql, conexao, transacao);
-            comando.Parameters.AddWithValue("@codigo", codigo);
-            comando.Parameters.AddWithValue("@nome", nome);
-            comando.Parameters.AddWithValue("@preco", preco);
-            comando.Parameters.AddWithValue("@genero", genero);
-            comando.Parameters.AddWithValue("@ano", ano);
-            comando.Parameters.AddWithValue("@imagem", imagem);
-
-            comando.ExecuteNonQuery();
-            transacao.Commit();
-
-            conexao.Close();
+                comando.ExecuteNonQuery();
+                transacao.Commit();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                connection.CloseConnection();
+            }
         }
 
         public void preencherDataGridView(DataGridView dgvFilmes)
         {
-            FbConnection conexao = Connection.Instance.GetConnection();
-            conexao.Open();
-
-            FbTransaction transacao = conexao.BeginTransaction();
-
-            string sql = "SELECT codigo, nome, preco, genero, ano_lancamento, imagem FROM filme;";
-
-            FbCommand comando = new FbCommand(sql, conexao, transacao);
-            FbDataReader dr = comando.ExecuteReader();
-
-            int nColunas = dr.FieldCount;
-
-            for (int i = 0; i < nColunas; i++)
+            try
             {
-                if (!dr.GetName(i).ToString().Equals("IMAGEM"))
-                {
-                    dgvFilmes.Columns.Add(dr.GetName(i).ToString(), dr.GetName(i).ToString());
-                    dgvFilmes.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-                    dgvFilmes.Columns[i].ReadOnly = true;
-                }
-            }
+                FbConnection conexao = connection.OpenConnection();
+                FbTransaction transacao = connection.GetTransaction();
 
-            string[] linhaDados = new string[nColunas];
+                string sql = "SELECT codigo, nome, preco, genero, ano_lancamento, imagem FROM filme;";
 
-            while (dr.Read())
-            {
-                //percorre cada uma das colunas
-                for (int a = 0; a < nColunas; a++)
+                FbCommand comando = new FbCommand(sql, conexao, transacao);
+                FbDataReader dr = comando.ExecuteReader();
+
+                int nColunas = dr.FieldCount;
+
+                for (int i = 0; i < nColunas; i++)
                 {
-                    if (dr.GetFieldType(a).ToString() == "System.Int32")
+                    if (!dr.GetName(i).ToString().Equals("IMAGEM"))
                     {
-                        linhaDados[a] = dr.GetInt32(a).ToString();
-                    }
-                    if (dr.GetFieldType(a).ToString() == "System.String")
-                    {
-                        linhaDados[a] = dr.GetString(a).ToString();
-                    }
-                    if (dr.GetFieldType(a).ToString() == "System.Decimal")
-                    {
-                        linhaDados[a] = dr.GetString(a).ToString();
+                        dgvFilmes.Columns.Add(dr.GetName(i).ToString(), dr.GetName(i).ToString());
+                        dgvFilmes.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+                        dgvFilmes.Columns[i].ReadOnly = true;
                     }
                 }
 
-                //atribui a linha ao datagridview
-                dgvFilmes.Rows.Add(linhaDados);
-            }
+                string[] linhaDados = new string[nColunas];
 
-            conexao.Close();
+                while (dr.Read())
+                {
+                    //percorre cada uma das colunas
+                    for (int a = 0; a < nColunas; a++)
+                    {
+                        if (dr.GetFieldType(a).ToString() == "System.Int32")
+                        {
+                            linhaDados[a] = dr.GetInt32(a).ToString();
+                        }
+                        if (dr.GetFieldType(a).ToString() == "System.String")
+                        {
+                            linhaDados[a] = dr.GetString(a).ToString();
+                        }
+                        if (dr.GetFieldType(a).ToString() == "System.Decimal")
+                        {
+                            linhaDados[a] = dr.GetString(a).ToString();
+                        }
+                    }
+
+                    //atribui a linha ao datagridview
+                    dgvFilmes.Rows.Add(linhaDados);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                connection.CloseConnection();
+            }
         }
 
         public IList<Filme> Listar()
         {
+
             IList<Filme> filmes = new List<Filme>();
 
-            FbConnection conexao = Connection.Instance.GetConnection();
-            conexao.Open();
-
-            FbTransaction transacao = conexao.BeginTransaction();
-
-            string sql = "SELECT codigo, nome, preco, genero, ano_lancamento, imagem FROM filme;";
-
-            FbCommand comando = new FbCommand(sql, conexao, transacao);
-            FbDataReader reader = comando.ExecuteReader();
-
-            while (reader.Read())
+            try
             {
-                Filme filme = new Filme()
-                {
-                    Codigo = reader.GetInt32(0),
-                    Nome = reader.GetString(1),
-                    Preco = reader.GetDecimal(2),
-                    Genero = reader.GetString(3),
-                    Ano = reader.GetInt32(4),
-                };
+                FbConnection conexao = connection.OpenConnection();
+                FbTransaction transacao = connection.GetTransaction();
 
-                if (!reader.IsDBNull(5))
+                string sql = "SELECT codigo, nome, preco, genero, ano_lancamento, imagem FROM filme;";
+
+                FbCommand comando = new FbCommand(sql, conexao, transacao);
+                FbDataReader reader = comando.ExecuteReader();
+
+                while (reader.Read())
                 {
-                    filme.Imagem = (byte[])reader["imagem"];
+                    Filme filme = new Filme()
+                    {
+                        Codigo = reader.GetInt32(0),
+                        Nome = reader.GetString(1),
+                        Preco = reader.GetDecimal(2),
+                        Genero = reader.GetString(3),
+                        Ano = reader.GetInt32(4),
+                    };
+
+                    if (!reader.IsDBNull(5))
+                    {
+                        filme.Imagem = (byte[])reader["imagem"];
+                    }
+
+                    filmes.Add(filme);
+
                 }
-
-                filmes.Add(filme);
-
             }
-
-            conexao.Close();
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                connection.CloseConnection();
+            }
 
             return filmes;
         }
@@ -152,58 +189,73 @@ namespace Data
         {
             Filme filme = null;
 
-            FbConnection conexao = Connection.Instance.GetConnection();
-
-            conexao.Open();
-
-            FbTransaction transacao = conexao.BeginTransaction();
-
-            string sql = "SELECT codigo, nome, preco, genero, ano_lancamento, imagem FROM filme WHERE codigo = @codigo;";
-
-            FbCommand comando = new FbCommand(sql, conexao, transacao);
-            comando.Parameters.AddWithValue("@codigo", codigo);
-
-            FbDataReader reader = comando.ExecuteReader();
-
-            while (reader.Read())
+            try
             {
-                filme = new Filme()
-                {
-                    Codigo = reader.GetInt32(0),
-                    Nome = reader.GetString(1),
-                    Preco = reader.GetDecimal(2),
-                    Genero = reader.GetString(3),
-                    Ano = reader.GetInt32(4),
-                };
+                FbConnection conexao = connection.OpenConnection();
+                FbTransaction transacao = connection.GetTransaction();
 
-                if (!reader.IsDBNull(5))
+                string sql = "SELECT codigo, nome, preco, genero, ano_lancamento, imagem FROM filme WHERE codigo = @codigo;";
+
+                FbCommand comando = new FbCommand(sql, conexao, transacao);
+                comando.Parameters.AddWithValue("@codigo", codigo);
+
+                FbDataReader reader = comando.ExecuteReader();
+
+                while (reader.Read())
                 {
-                    filme.Imagem = (byte[])reader["imagem"];
+                    filme = new Filme()
+                    {
+                        Codigo = reader.GetInt32(0),
+                        Nome = reader.GetString(1),
+                        Preco = reader.GetDecimal(2),
+                        Genero = reader.GetString(3),
+                        Ano = reader.GetInt32(4),
+                    };
+
+                    if (!reader.IsDBNull(5))
+                    {
+                        filme.Imagem = (byte[])reader["imagem"];
+                    }
+
                 }
-
             }
-
-            conexao.Close();
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                connection.CloseConnection();
+            }
 
             return filme;
         }
 
         public void Remover(int codigo)
         {
-            FbConnection conexao = Connection.Instance.GetConnection();
-            conexao.Open();
+            try
+            {
 
-            FbTransaction transacao = conexao.BeginTransaction();
+                FbConnection conexao = connection.OpenConnection();
+                FbTransaction transacao = connection.GetTransaction();
 
-            string sql = "DELETE FROM filme WHERE codigo = @codigo;";
+                string sql = "DELETE FROM filme WHERE codigo = @codigo;";
 
-            FbCommand comando = new FbCommand(sql, conexao, transacao);
-            comando.Parameters.AddWithValue("@codigo", codigo);
+                FbCommand comando = new FbCommand(sql, conexao, transacao);
+                comando.Parameters.AddWithValue("@codigo", codigo);
 
-            comando.ExecuteNonQuery();
-            transacao.Commit();
+                comando.ExecuteNonQuery();
+                transacao.Commit();
 
-            conexao.Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                connection.CloseConnection();
+            }
         }
 
 
@@ -243,37 +295,45 @@ namespace Data
         {
             IList<Filme> filmes = new List<Filme>();
 
-            FbConnection conexao = Connection.Instance.GetConnection();
-            conexao.Open();
-
-            FbTransaction transacao = conexao.BeginTransaction();
-
-            string sql = "SELECT codigo, nome, preco, genero, ano_lancamento, imagem FROM filme;";
-
-            FbCommand comando = new FbCommand(sql, conexao, transacao);
-            FbDataReader reader = comando.ExecuteReader();
-
-            while (reader.Read())
+            try
             {
-                Filme filme = new Filme()
-                {
-                    Codigo = reader.GetInt32(0),
-                    Nome = reader.GetString(1),
-                    Preco = reader.GetDecimal(2),
-                    Genero = reader.GetString(3),
-                    Ano = reader.GetInt32(4),
-                };
 
-                if (!reader.IsDBNull(5))
+                FbConnection conexao = connection.OpenConnection();
+                FbTransaction transacao = connection.GetTransaction();
+
+                string sql = "SELECT codigo, nome, preco, genero, ano_lancamento, imagem FROM filme;";
+
+                FbCommand comando = new FbCommand(sql, conexao, transacao);
+                FbDataReader reader = comando.ExecuteReader();
+
+                while (reader.Read())
                 {
-                    filme.Imagem = (byte[])reader["imagem"];
+                    Filme filme = new Filme()
+                    {
+                        Codigo = reader.GetInt32(0),
+                        Nome = reader.GetString(1),
+                        Preco = reader.GetDecimal(2),
+                        Genero = reader.GetString(3),
+                        Ano = reader.GetInt32(4),
+                    };
+
+                    if (!reader.IsDBNull(5))
+                    {
+                        filme.Imagem = (byte[])reader["imagem"];
+                    }
+
+                    filmes.Add(filme);
+
                 }
-
-                filmes.Add(filme);
-
             }
-
-            conexao.Close();
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                connection.CloseConnection();
+            }
 
             return filmes;
         }

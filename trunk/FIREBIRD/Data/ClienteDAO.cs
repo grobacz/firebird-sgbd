@@ -11,141 +11,179 @@ namespace Data
 {
     public class ClienteDAO : IClienteDAO
     {
+        private Connection connection;
+
+        public ClienteDAO()
+        {
+            connection = Connection.Instance;
+        }
+
         #region IClienteDAO Members
 
         public void Atualizar(string cpfAntigo, string cpfNovo, string nome, string endereco, string telefone, DateTime dataNascimento)
         {
-            FbConnection conexao = Connection.Instance.GetConnection();
-            conexao.Open();
+            try
+            {
 
-            FbTransaction transacao = conexao.BeginTransaction();
+                FbConnection conexao = connection.OpenConnection();
+                FbTransaction transacao = connection.GetTransaction();
 
-            string sql = "UPDATE cliente SET cpf = @cpfNovo, nome = @nome, endereco = @endereco, telefone = @telefone, data_nascimento = @data WHERE cpf = @cpfAntigo;";
+                string sql = "UPDATE cliente SET cpf = @cpfNovo, nome = @nome, endereco = @endereco, telefone = @telefone, data_nascimento = @data WHERE cpf = @cpfAntigo;";
 
-            FbCommand comando = new FbCommand(sql, conexao, transacao);
-            comando.Parameters.AddWithValue("@cpfNovo", cpfNovo);
-            comando.Parameters.AddWithValue("@cpfAntigo", cpfAntigo);
-            comando.Parameters.AddWithValue("@nome", nome);
-            comando.Parameters.AddWithValue("@endereco", endereco);
-            comando.Parameters.AddWithValue("@telefone", telefone);
-            comando.Parameters.AddWithValue("@data", dataNascimento);
+                FbCommand comando = new FbCommand(sql, conexao, transacao);
+                comando.Parameters.AddWithValue("@cpfNovo", cpfNovo);
+                comando.Parameters.AddWithValue("@cpfAntigo", cpfAntigo);
+                comando.Parameters.AddWithValue("@nome", nome);
+                comando.Parameters.AddWithValue("@endereco", endereco);
+                comando.Parameters.AddWithValue("@telefone", telefone);
+                comando.Parameters.AddWithValue("@data", dataNascimento);
 
-            comando.ExecuteNonQuery();
-            transacao.Commit();
-
-            conexao.Close();
+                comando.ExecuteNonQuery();
+                transacao.Commit();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                connection.CloseConnection();
+            }
         }
 
         public void Inserir(string cpf, string nome, string endereco, string telefone, DateTime dataNascimento)
         {
-            FbConnection conexao = Connection.Instance.GetConnection();
-            conexao.Open();
+            try
+            {
+                FbConnection conexao = connection.OpenConnection();
+                FbTransaction transacao = connection.GetTransaction();
 
-            FbTransaction transacao = conexao.BeginTransaction();
+                string insertSql = "INSERT INTO cliente (cpf, nome, endereco, telefone, data_nascimento) VALUES (@cpf, @nome, @endereco, @telefone, @data);";
 
-            string insertSql = "INSERT INTO cliente (cpf, nome, endereco, telefone, data_nascimento) VALUES (@cpf, @nome, @endereco, @telefone, @data);";
+                FbCommand comando = new FbCommand(insertSql, conexao, transacao);
+                comando.Parameters.AddWithValue("@cpf", cpf);
+                comando.Parameters.AddWithValue("@nome", nome);
+                comando.Parameters.AddWithValue("@endereco", endereco);
+                comando.Parameters.AddWithValue("@telefone", telefone);
+                comando.Parameters.AddWithValue("@data", dataNascimento);
 
-            FbCommand comando = new FbCommand(insertSql, conexao, transacao);
-            comando.Parameters.AddWithValue("@cpf", cpf);
-            comando.Parameters.AddWithValue("@nome", nome);
-            comando.Parameters.AddWithValue("@endereco", endereco);
-            comando.Parameters.AddWithValue("@telefone", telefone);
-            comando.Parameters.AddWithValue("@data", dataNascimento);
-
-            comando.ExecuteNonQuery();
-            transacao.Commit();
-
-            conexao.Close();
+                comando.ExecuteNonQuery();
+                transacao.Commit();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                connection.CloseConnection();
+            }
         }
 
         public IList<Cliente> Listar()
         {
             IList<Cliente> clientes = new List<Cliente>();
 
-            FbConnection conexao = Connection.Instance.GetConnection();
-            conexao.Open();
-
-            FbTransaction transacao = conexao.BeginTransaction();
-
-            string sql = "SELECT cpf, nome, endereco, telefone, data_nascimento FROM cliente;";
-
-            FbCommand comando = new FbCommand(sql, conexao, transacao);
-            FbDataReader reader = comando.ExecuteReader();
-
-            while (reader.Read())
+            try
             {
-                Cliente cliente = new Cliente()
+
+                FbConnection conexao = connection.OpenConnection();
+                FbTransaction transacao = connection.GetTransaction();
+
+                string sql = "SELECT cpf, nome, endereco, telefone, data_nascimento FROM cliente;";
+
+                FbCommand comando = new FbCommand(sql, conexao, transacao);
+                FbDataReader reader = comando.ExecuteReader();
+
+                while (reader.Read())
                 {
-                    Cpf = reader.GetString(0),
-                    Nome = reader.GetString(1),
-                    Endereco = reader.GetString(2),
-                    Telefone = reader.GetString(3),
-                    DataNascimento = reader.GetDateTime(4)
-                };
+                    Cliente cliente = new Cliente()
+                    {
+                        Cpf = reader.GetString(0),
+                        Nome = reader.GetString(1),
+                        Endereco = reader.GetString(2),
+                        Telefone = reader.GetString(3),
+                        DataNascimento = reader.GetDateTime(4)
+                    };
 
-                clientes.Add(cliente);
+                    clientes.Add(cliente);
 
+                }
             }
-
-            conexao.Close();
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                connection.CloseConnection();
+            }
 
             return clientes;
         }
 
         public void preencherDataGridView(DataGridView dgvClientes)
         {
-            FbConnection conexao = Connection.Instance.GetConnection();
-            conexao.Open();
-
-            FbTransaction transacao = conexao.BeginTransaction();
-            string sql = "SELECT cpf, nome, endereco, telefone, data_nascimento FROM cliente;";
-
-            FbCommand comando = new FbCommand(sql, conexao, transacao);
-            FbDataReader dr = comando.ExecuteReader();
-
-            int nColunas = dr.FieldCount;
-
-            for (int i = 0; i < nColunas; i++)
+            try
             {
-                dgvClientes.Columns.Add(dr.GetName(i).ToString(), dr.GetName(i).ToString());
-                dgvClientes.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
-                dgvClientes.Columns[i].ReadOnly = true;
-            }
+                FbConnection conexao = connection.OpenConnection();
+                FbTransaction transacao = connection.GetTransaction();
 
-            string[] linhaDados = new string[nColunas];
+                string sql = "SELECT cpf, nome, endereco, telefone, data_nascimento FROM cliente;";
 
-            while (dr.Read())
-            {
-                //percorre cada uma das colunas
-                for (int a = 0; a < nColunas; a++)
+                FbCommand comando = new FbCommand(sql, conexao, transacao);
+                FbDataReader dr = comando.ExecuteReader();
+
+                int nColunas = dr.FieldCount;
+
+                for (int i = 0; i < nColunas; i++)
                 {
-
-                    if (dr.GetFieldType(a).ToString() == "System.Int32")
-                    {
-                        linhaDados[a] = dr.GetInt32(a).ToString();
-                    }
-                    else if (dr.GetFieldType(a).ToString() == "System.String")
-                    {
-                        linhaDados[a] = dr.GetString(a).ToString();
-                    }
-                    else if (dr.GetFieldType(a).ToString() == "System.Decimal")
-                    {
-                        linhaDados[a] = dr.GetString(a).ToString();
-                    }
-                    else if (dr.GetFieldType(a).ToString() == "System.DateTime")
-                    {
-                        string data = dr.GetString(a).ToString();
-                        data = data.Substring(0, 10);
-
-                        linhaDados[a] = data;
-                    }
+                    dgvClientes.Columns.Add(dr.GetName(i).ToString(), dr.GetName(i).ToString());
+                    dgvClientes.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.DisplayedCells;
+                    dgvClientes.Columns[i].ReadOnly = true;
                 }
 
-                //atribui a linha ao datagridview
-                dgvClientes.Rows.Add(linhaDados);
-            }
+                string[] linhaDados = new string[nColunas];
 
-            conexao.Close();
+                while (dr.Read())
+                {
+                    //percorre cada uma das colunas
+                    for (int a = 0; a < nColunas; a++)
+                    {
+
+                        if (dr.GetFieldType(a).ToString() == "System.Int32")
+                        {
+                            linhaDados[a] = dr.GetInt32(a).ToString();
+                        }
+                        else if (dr.GetFieldType(a).ToString() == "System.String")
+                        {
+                            linhaDados[a] = dr.GetString(a).ToString();
+                        }
+                        else if (dr.GetFieldType(a).ToString() == "System.Decimal")
+                        {
+                            linhaDados[a] = dr.GetString(a).ToString();
+                        }
+                        else if (dr.GetFieldType(a).ToString() == "System.DateTime")
+                        {
+                            string data = dr.GetString(a).ToString();
+                            data = data.Substring(0, 10);
+
+                            linhaDados[a] = data;
+                        }
+                    }
+
+                    //atribui a linha ao datagridview
+                    dgvClientes.Rows.Add(linhaDados);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                connection.CloseConnection();
+            }
 
         }
 
@@ -153,54 +191,66 @@ namespace Data
         {
             Cliente cliente = null;
 
-            FbConnection conexao = Connection.Instance.GetConnection();
-            
-            if (conexao.State != ConnectionState.Open)
-                conexao.Open();
-
-            FbTransaction transacao = conexao.BeginTransaction();
-
-            string sql = "SELECT cpf, nome, endereco, telefone, data_nascimento FROM cliente WHERE cpf = @cpf;";
-
-            FbCommand comando = new FbCommand(sql, conexao, transacao);
-            comando.Parameters.AddWithValue("@cpf", cpf);
-
-            FbDataReader reader = comando.ExecuteReader();
-
-            while (reader.Read())
+            try
             {
-                cliente = new Cliente()
+                FbConnection conexao = connection.OpenConnection();
+                FbTransaction transacao = connection.GetTransaction();
+
+                string sql = "SELECT cpf, nome, endereco, telefone, data_nascimento FROM cliente WHERE cpf = @cpf;";
+
+                FbCommand comando = new FbCommand(sql, conexao, transacao);
+                comando.Parameters.AddWithValue("@cpf", cpf);
+
+                FbDataReader reader = comando.ExecuteReader();
+
+                while (reader.Read())
                 {
-                    Cpf = reader.GetString(0),
-                    Nome = reader.GetString(1),
-                    Endereco = reader.GetString(2),
-                    Telefone = reader.GetString(3),
-                    DataNascimento = reader.GetDateTime(4)
-                };
+                    cliente = new Cliente()
+                    {
+                        Cpf = reader.GetString(0),
+                        Nome = reader.GetString(1),
+                        Endereco = reader.GetString(2),
+                        Telefone = reader.GetString(3),
+                        DataNascimento = reader.GetDateTime(4)
+                    };
 
+                }
             }
-
-            conexao.Close();
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                connection.CloseConnection();
+            }
 
             return cliente;
         }
 
         public void Remover(string cpf)
         {
-            FbConnection conexao = Connection.Instance.GetConnection();
-            conexao.Open();
+            try
+            {
+                FbConnection conexao = connection.OpenConnection();
+                FbTransaction transacao = connection.GetTransaction();
 
-            FbTransaction transacao = conexao.BeginTransaction();
+                string sql = "DELETE FROM cliente WHERE cpf = @cpf;";
 
-            string sql = "DELETE FROM cliente WHERE cpf = @cpf;";
+                FbCommand comando = new FbCommand(sql, conexao, transacao);
+                comando.Parameters.AddWithValue("@cpf", cpf);
 
-            FbCommand comando = new FbCommand(sql, conexao, transacao);
-            comando.Parameters.AddWithValue("@cpf", cpf);
-
-            comando.ExecuteNonQuery();
-            transacao.Commit();
-
-            conexao.Close();
+                comando.ExecuteNonQuery();
+                transacao.Commit();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                connection.CloseConnection();
+            }
         }
 
         #endregion
