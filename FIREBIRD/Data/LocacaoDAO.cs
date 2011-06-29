@@ -101,7 +101,8 @@ namespace Data
 
             FbTransaction transacao = conexao.BeginTransaction();
 
-            string sql = "SELECT * FROM locacao";
+            string sql = "SELECT DISTINCT codigo, cpf_cliente, status FROM locacao";
+            
 
             FbCommand comando = new FbCommand(sql, conexao, transacao);
             FbDataReader dr = comando.ExecuteReader();
@@ -126,7 +127,7 @@ namespace Data
             cellCombo.Items.Add("Disponível");
             DataGridViewColumn columnStatus = new DataGridViewColumn(cellCombo);
             dgvLocacao.Columns.Add(columnStatus);
-            dgvLocacao.Columns[3].HeaderText = "STATUS";
+            dgvLocacao.Columns[2].HeaderText = "STATUS";
 
 
             while (dr.Read())
