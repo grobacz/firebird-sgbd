@@ -27,11 +27,10 @@ namespace FIREBIRD
             InitializeComponent();
             this.principal = pai;
 
-            this.cbGeneroFilme.Items.Add("Ação");
-            this.cbGeneroFilme.Items.Add("Comédia");
-            this.cbGeneroFilme.Items.Add("Desenho Animado");
-            this.cbGeneroFilme.Items.Add("Romance");
-            this.cbGeneroFilme.Items.Add("Terror");
+            foreach (string genero in Data.Classes.Genero.Generos)
+            {
+                this.cbGeneroFilme.Items.Add(genero);
+            }
 
             imagemMesma = filmeSelecionado.Imagem;
 
@@ -72,8 +71,6 @@ namespace FIREBIRD
                 {
                     controleFilme.Atualizar(codigo, nome, preco, genero, anoLancamento, imagemMesma);
                 }
-
-                
 
                 this.Close();
 

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using FirebirdSql.Data.FirebirdClient;
 using System.IO;
+using System.Diagnostics;
+using System.Configuration;
 
 namespace Data
 {
@@ -37,6 +39,8 @@ namespace Data
         {
             if (connection == null)
             {
+                Debug.WriteLine("criando de novo");
+
                 string path = Path.Combine(Environment.CurrentDirectory, @"..\..\data\LOCADORA.FDB");
 
                 return new FbConnection("User ID=sysdba;Password=masterkey;" +
@@ -47,35 +51,52 @@ namespace Data
             return connection;
         }
 
-        
 
-        public void TransactionParameter(ConfigTransacao index)
+
+        public FbTransaction GetTransaction()
         {
+            int loadedConfiguration = int.Parse(ConfigurationManager.AppSettings["TransactionConfig"]);
+
             FbTransactionOptions configTran = new FbTransactionOptions();
 
-            switch(index)
+            switch (loadedConfiguration)
             {
-                case ConfigTransacao.Consistency:
+                case (int)ConfigTransacao.Consistency:
                     configTran.TransactionBehavior = FbTransactionBehavior.Consistency;
                     break;
-                case ConfigTransacao.Concurrency_NOWAIT:
+                case (int)ConfigTransacao.Concurrency_NOWAIT:
                     configTran.TransactionBehavior = FbTransactionBehavior.Concurrency | FbTransactionBehavior.NoWait;
                     break;
-                case ConfigTransacao.Concurrency_WAIT:
+                case (int)ConfigTransacao.Concurrency_WAIT:
                     configTran.TransactionBehavior = FbTransactionBehavior.Concurrency | FbTransactionBehavior.Wait;
                     break;
-                case ConfigTransacao.ReadCommitted_NOWAIT:
+                case (int)ConfigTransacao.ReadCommitted_NOWAIT:
                     configTran.TransactionBehavior = FbTransactionBehavior.ReadCommitted | FbTransactionBehavior.NoWait;
                     break;
-                case ConfigTransacao.ReadCommitted_WAIT:
+                case (int)ConfigTransacao.ReadCommitted_WAIT:
                     configTran.TransactionBehavior = FbTransactionBehavior.ReadCommitted | FbTransactionBehavior.Wait;
                     break;
                 default:
                     Console.WriteLine("Default case");
                     break;
             }
-            connection.BeginTransaction(configTran);
 
+            return connection.BeginTransaction(configTran);
+
+        }
+
+        public void CloseConnection()
+        {
+            if (connection.State == System.Data.ConnectionState.Open)
+                connection.Close();
+        }
+
+        public FbConnection OpenConnection()
+        {
+            if (connection.State == System.Data.ConnectionState.Closed)
+                connection.Open();
+
+            return connection;
         }
 
         public enum ConfigTransacao
