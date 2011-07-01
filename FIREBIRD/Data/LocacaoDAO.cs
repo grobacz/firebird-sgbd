@@ -28,7 +28,7 @@ namespace Data
             try
             {
                 FbConnection conexao = connection.OpenConnection();
-                FbTransaction transacao = connection.GetTransaction();
+                FbTransaction transacao = connection.GetTransaction(1);
 
                 string sql = "UPDATE locacao SET status = @status WHERE codigo = @codigo;";
 
@@ -55,7 +55,7 @@ namespace Data
             try
             {
                 FbConnection conexao = connection.OpenConnection();
-                FbTransaction transacao = connection.GetTransaction();
+                FbTransaction transacao = connection.GetTransaction(1);
 
                 string insertSql = "INSERT INTO locacao (codigo, cpf_cliente, codigo_filme, status) VALUES (@codigo, @cpf, @codigoFilme, @status);";
 
@@ -91,9 +91,9 @@ namespace Data
             try
             {
                 FbConnection conexao = connection.OpenConnection();
-                FbTransaction transacao = connection.GetTransaction();
+                FbTransaction transacao = connection.GetTransaction(2);
 
-                string sql = "SELECT DISTINCT codigo FROM locacao;";
+                string sql = "SELECT DISTINCT codigo FROM locacao WITH LOCK;";
 
                 FbCommand comando = new FbCommand(sql, conexao, transacao);
                 FbDataReader reader = comando.ExecuteReader();
@@ -121,9 +121,9 @@ namespace Data
             try
             {
                 FbConnection conexao = connection.OpenConnection();
-                FbTransaction transacao = connection.GetTransaction();
+                FbTransaction transacao = connection.GetTransaction(1);
 
-                string sql = "SELECT DISTINCT codigo, cpf_cliente, status FROM locacao";
+                string sql = "SELECT DISTINCT codigo, cpf_cliente, status FROM locacao  ";
 
 
                 FbCommand comando = new FbCommand(sql, conexao, transacao);
@@ -214,7 +214,7 @@ namespace Data
             int status = 0;
             IList<int> codigoFilmes = new List<int>();
 
-            string sql = "SELECT DISTINCT cpf_cliente, status FROM locacao WHERE codigo = @codigo;";
+            string sql = "SELECT DISTINCT cpf_cliente, status FROM locacao WHERE codigo = @codigo  ;";
 
             FbCommand comando = new FbCommand(sql, conexao, transacao);
             comando.Parameters.AddWithValue("@codigo", codigo);
@@ -254,7 +254,7 @@ namespace Data
             try
             {
                 FbConnection conexao = connection.OpenConnection();
-                FbTransaction transacao = connection.GetTransaction();
+                FbTransaction transacao = connection.GetTransaction(1);
 
                 Cliente cliente;
                 IList<Filme> filmes = new List<Filme>();
@@ -262,7 +262,7 @@ namespace Data
                 int status = 0;
                 IList<int> codigoFilmes = new List<int>();
 
-                string sql = "SELECT DISTINCT cpf_cliente, status FROM locacao WHERE codigo = @codigo;";
+                string sql = "SELECT DISTINCT cpf_cliente, status FROM locacao WHERE codigo = @codigo  ;";
 
                 FbCommand comando = new FbCommand(sql, conexao, transacao);
                 comando.Parameters.AddWithValue("@codigo", codigo);
@@ -311,7 +311,7 @@ namespace Data
             try
             {
                 FbConnection conexao = connection.OpenConnection();
-                FbTransaction transacao = connection.GetTransaction();
+                FbTransaction transacao = connection.GetTransaction(4);
 
                 string sql = "DELETE FROM locacao WHERE codigo = @codigo;";
 
@@ -360,7 +360,7 @@ namespace Data
         {
             IList<int> retorno = new List<int>();
 
-            string sql = "SELECT codigo_filme FROM locacao WHERE codigo = @codigo;";
+            string sql = "SELECT codigo_filme FROM locacao WHERE codigo = @codigo  ;";
 
             FbCommand comando = new FbCommand(sql, conexao, transacao);
             comando.Parameters.AddWithValue("@codigo", codigo);

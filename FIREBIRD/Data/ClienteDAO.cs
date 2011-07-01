@@ -26,7 +26,7 @@ namespace Data
             {
 
                 FbConnection conexao = connection.OpenConnection();
-                FbTransaction transacao = connection.GetTransaction();
+                FbTransaction transacao = connection.GetTransaction(1);
 
                 string sql = "UPDATE cliente SET cpf = @cpfNovo, nome = @nome, endereco = @endereco, telefone = @telefone, data_nascimento = @data WHERE cpf = @cpfAntigo;";
 
@@ -56,7 +56,7 @@ namespace Data
             try
             {
                 FbConnection conexao = connection.OpenConnection();
-                FbTransaction transacao = connection.GetTransaction();
+                FbTransaction transacao = connection.GetTransaction(1);
 
                 string insertSql = "INSERT INTO cliente (cpf, nome, endereco, telefone, data_nascimento) VALUES (@cpf, @nome, @endereco, @telefone, @data);";
 
@@ -88,9 +88,9 @@ namespace Data
             {
 
                 FbConnection conexao = connection.OpenConnection();
-                FbTransaction transacao = connection.GetTransaction();
+                FbTransaction transacao = connection.GetTransaction(2);
 
-                string sql = "SELECT cpf, nome, endereco, telefone, data_nascimento FROM cliente;";
+                string sql = "SELECT cpf, nome, endereco, telefone, data_nascimento FROM cliente WITH LOCK;";
 
                 FbCommand comando = new FbCommand(sql, conexao, transacao);
                 FbDataReader reader = comando.ExecuteReader();
@@ -127,9 +127,9 @@ namespace Data
             try
             {
                 FbConnection conexao = connection.OpenConnection();
-                FbTransaction transacao = connection.GetTransaction();
+                FbTransaction transacao = connection.GetTransaction(1);
 
-                string sql = "SELECT cpf, nome, endereco, telefone, data_nascimento FROM cliente;";
+                string sql = "SELECT cpf, nome, endereco, telefone, data_nascimento FROM cliente  ;";
 
                 FbCommand comando = new FbCommand(sql, conexao, transacao);
                 FbDataReader dr = comando.ExecuteReader();
@@ -194,9 +194,9 @@ namespace Data
             try
             {
                 FbConnection conexao = connection.OpenConnection();
-                FbTransaction transacao = connection.GetTransaction();
+                FbTransaction transacao = connection.GetTransaction(1);
 
-                string sql = "SELECT cpf, nome, endereco, telefone, data_nascimento FROM cliente WHERE cpf = @cpf;";
+                string sql = "SELECT cpf, nome, endereco, telefone, data_nascimento FROM cliente WHERE cpf = @cpf  ;";
 
                 FbCommand comando = new FbCommand(sql, conexao, transacao);
                 comando.Parameters.AddWithValue("@cpf", cpf);
@@ -233,7 +233,7 @@ namespace Data
             try
             {
                 FbConnection conexao = connection.OpenConnection();
-                FbTransaction transacao = connection.GetTransaction();
+                FbTransaction transacao = connection.GetTransaction(4);
 
                 string sql = "DELETE FROM cliente WHERE cpf = @cpf;";
 
@@ -259,7 +259,7 @@ namespace Data
         {
             Cliente cliente = null;
 
-            string sql = "SELECT cpf, nome, endereco, telefone, data_nascimento FROM cliente WHERE cpf = @cpf;";
+            string sql = "SELECT cpf, nome, endereco, telefone, data_nascimento FROM cliente WHERE cpf = @cpf  ;";
 
             FbCommand comando = new FbCommand(sql, conexao, transacao);
             comando.Parameters.AddWithValue("@cpf", cpf);

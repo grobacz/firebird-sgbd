@@ -53,9 +53,9 @@ namespace Data
 
 
 
-        public FbTransaction GetTransaction()
+        public FbTransaction GetTransaction(int loadedConfiguration)
         {
-            int loadedConfiguration = int.Parse(ConfigurationManager.AppSettings["TransactionConfig"]);
+            //int loadedConfiguration = int.Parse(ConfigurationManager.AppSettings["TransactionConfig"]);
 
             FbTransactionOptions configTran = new FbTransactionOptions();
 

@@ -26,9 +26,17 @@ namespace FIREBIRD
             controleFilme = new ControleFilme();
             controleLocacao = new ControleLocacao();
 
-            controleFilme.preencherDataGridView(this.dgvFilmes);
-            controleCliente.preencherDataGridView(this.dgvClientes);
-            controleLocacao.preencherDataGridView(this.dgvLocacao);
+            try
+            {
+                controleFilme.preencherDataGridView(this.dgvFilmes);
+                controleCliente.preencherDataGridView(this.dgvClientes);
+                controleLocacao.preencherDataGridView(this.dgvLocacao);
+            }
+            catch(Exception ex){
+
+                MessageBox.Show(ex.ToString());
+            }
+
             
         }
 
@@ -69,9 +77,17 @@ namespace FIREBIRD
 
                 if (codigo != null)
                 {
-                    controleLocacao.Remover(Convert.ToInt32(codigo));
-                    this.CarregarLocacoes();
-                    MessageBox.Show("A locação foi removida com sucesso!");
+                    try
+                    {
+                        controleLocacao.Remover(Convert.ToInt32(codigo));
+                        this.CarregarLocacoes();
+                        MessageBox.Show("A locação foi removida com sucesso!");
+                    }
+                    catch(Exception ex){
+
+                        MessageBox.Show(ex.ToString());
+                    }
+
                 }
                 else
                 {
@@ -198,9 +214,17 @@ namespace FIREBIRD
 
                 if (codigo != null)
                 {
-                    controleFilme.Remover(Convert.ToInt32(codigo));
-                    this.CarregarFilmes();
-                    MessageBox.Show("O filme foi removido com sucesso!");
+                    try
+                    {
+                        controleFilme.Remover(Convert.ToInt32(codigo));
+                        this.CarregarFilmes();
+                        MessageBox.Show("O filme foi removido com sucesso!");
+                    }
+                    catch(Exception ex){
+
+                        MessageBox.Show(ex.ToString());
+                    }
+                    
                 }
                 else
                 {
@@ -224,10 +248,15 @@ namespace FIREBIRD
 
                 if (cpf != null)
                 {
-                    controleCliente.Remover(cpf);
-                    this.CarregarClientes();
-                    MessageBox.Show("O cliente foi removido com sucesso!");
-
+                    try
+                    {
+                        controleCliente.Remover(cpf);
+                        this.CarregarClientes();
+                        MessageBox.Show("O cliente foi removido com sucesso!");
+                    }
+                    catch(Exception ex){
+                        MessageBox.Show(ex.ToString());
+                    }
                 }
                 else
                 {
